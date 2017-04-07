@@ -1,7 +1,9 @@
 package AVL;
 
 import java.awt.List;
-
+/*
+* @author Ionésio Junior
+*/
 public class AVL<T extends Comparable<T>> extends BST<T> {
 	
 	public AVL(){

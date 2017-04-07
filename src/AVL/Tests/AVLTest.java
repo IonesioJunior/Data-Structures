@@ -3,7 +3,9 @@ package AVL.Tests;
 import org.junit.*;
 
 import AVL.AVL;
-
+/*
+* @author Ionésio Junior
+*/
 public class AVLTest {
 	public AVL<Integer> avl;
 	

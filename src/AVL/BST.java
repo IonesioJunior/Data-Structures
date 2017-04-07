@@ -2,7 +2,9 @@ package AVL;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+* @author Ionésio Junior
+*/
 public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 	private Node<T> root;
 	
