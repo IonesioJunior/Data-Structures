@@ -21,12 +21,19 @@ public class SimpleQueue<T> implements QueueInterface<T>{
 	@Override
 	public T dequeue() throws QueueUnderflowException {
 		if(!this.isEmpty()){
-			return this.array[tail--];
+			T removedElement = this.array[0];
+			switchArray();
+			tail--;
+			return removedElement;
 		}else{
 			throw new QueueUnderflowException();
 		}
 	}
-
+	private void switchArray(){
+		for(int i = 0 ; i < tail;i++){
+			this.array[i] = this.array[i+1];		
+		}	
+	}
 	@Override
 	public T head() {
 		if(!this.isEmpty())
