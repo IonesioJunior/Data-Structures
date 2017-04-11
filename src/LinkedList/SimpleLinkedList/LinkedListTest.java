@@ -21,10 +21,10 @@ public class LinkedListTest {
 	
 	@Before
 	public void setUp(){
-		//list1 = new DoubleLinkedList<Integer>();
-		//list2 = new SimpleLinkedList<Integer>();
-		list1 = new RecursiveDoubleLinkedList<Integer>();
-		list2 = new RecursiveLinkedList<Integer>();
+		list1 = new DoubleLinkedList<Integer>();
+		list2 = new SimpleLinkedList<Integer>();
+		//list1 = new RecursiveDoubleLinkedList<Integer>();
+		//list2 = new RecursiveLinkedList<Integer>();
 	}
 	
 	@Test
@@ -32,6 +32,7 @@ public class LinkedListTest {
 		this.list1.insert(new Integer(9));
 		this.list1.insert(new Integer(10));
 		this.list1.insert(new Integer(185));
+		list2.insert(new Integer(8));
 	}
 	
 	@Test

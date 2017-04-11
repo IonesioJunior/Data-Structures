@@ -56,10 +56,9 @@ public class SimpleLinkedList<T> implements LinkedListInterface<T>{
 			}else{
 				Node<T> aux = this.head;
 				while(!aux.isNIL()){
-					if(aux.getData() == element){
-						Node<T> next = aux.getNext();
-						aux.setData(next.getData());
-						aux.setNext(next.getNext());
+					if(aux.getData().equals(element)){
+						aux.setData(aux.getNext().getData());
+						aux.setNext(aux.getNext().getNext());
 						break;
 					}
 					aux = aux.getNext();

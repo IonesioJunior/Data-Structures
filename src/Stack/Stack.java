@@ -10,6 +10,8 @@ public class Stack<T> implements StackInterface<T> {
 	
 	@Override
 	public void push(T element) throws StackOverflowException {
+		if(element == null)
+			return;
 		if(!this.isFull()){
 			this.array[++top] = element;
 		}else{

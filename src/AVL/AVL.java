@@ -1,51 +1,33 @@
 package AVL;
 
-import java.awt.List;
-/*
-* @author Ionésio Junior
-*/
-public class AVL<T extends Comparable<T>> extends BST<T> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class AVL<T extends Comparable<T>> implements AVLInterface<T> {
+	
+	private Node<T> root;
 	
 	public AVL(){
-		super();
-		
+		this.root = new Node<T>();
 	}
-	//Calcula o balanço de um determinado nó na arvore
-    public int calculateBalance(Node<T> node) {
-        if (node.isNIL()) return 0;
-        return recursiveHeight((Node<T>) node.getLeft()) - recursiveHeight((Node<T>) node.getRight());
-    }
+	
+	
+	@Override
+	public boolean isEmpty() {
+		return this.root.getData() == null;
+	}
 
-    //Faz o rebalanceamento duplo ou unico
-    protected void rebalance(Node<T> node) {
+	@Override
+	public void insert(T element) {
+		if(element == null)
+			return;
+		else{
+			recursiveInsert(element,this.root,this.root.getParent());
+		}
+	}
 
-        int balance = calculateBalance(node); //Balanceamento do nó
-        int balanceLeftChild = calculateBalance((Node<T>) node.getLeft()); //Balanceamento do filho a esquerda
-        int balanceRightChild = calculateBalance((Node<T>) node.getRight()); //Balanceamento do filho a direita
-
-
-        if (balance > 1) { //Caso esteja desbalanceado para a esquerda
-            
-        	if (balanceLeftChild < 0) { //Caso tenha zig zag
-                leftRotation((Node<T>) node.getLeft());
-            }
-            rightRotation(node); //Rebalanceamento default para a esquerda
-
-        } else if (balance < -1) { // Caso esteja desbalanceado para a direita
-
-            if (balanceRightChild > 0) { //Caso tenha zig zag
-                rightRotation((Node<T>) node.getRight());
-            }
-            leftRotation(node); //Rebalanceamento default para a esquerda
-        }
-
-    }
-
-
-    @Override
-    protected void recursiveInsert(T element,Node<T> node, Node<T> parent) {
-
-        if (node.isNIL()) { //Sendo um nó vazio, apenas muda-se o valor e cria-se seus vizinhos
+    private void recursiveInsert(T element,Node<T> node, Node<T> parent) {
+        if (node.isNIL()) {
             node.setData(element);
             node.setLeft(new Node<T>());
             node.setRight(new Node<T>());
@@ -53,29 +35,28 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
         } else {
             T nodeData = node.getData();
 
-            if (nodeData.equals(element)) { //Ja exista um valor igual, retorna
-
+            if (nodeData.equals(element)) {
                 return;
-
-            } else if (nodeData.compareTo(element) > 0) {//Caso o valor do nó seja maior
-
-                recursiveInsert( element,(Node<T>) node.getLeft(), node); //Vá para a esquerda
-
-            } else { // Do contrario
-
-                recursiveInsert(element,(Node<T>) node.getRight(),  node); //Vá para a direita
-
+            } else if (nodeData.compareTo(element) > 0) {
+                recursiveInsert( element,(Node<T>) node.getLeft(), node);
+            } else {
+                recursiveInsert(element,(Node<T>) node.getRight(),  node);
             }
-
         }
-        rebalance(node); //Rebalanceamento após o processo de inserção
-
+        rebalance(node);
     }
 
-
-    @Override
-    public void recursiveRemove(Node<T> node) {
-
+	@Override
+	public void remove(T element) {
+		Node<T> foundNode = search(element);
+		if(foundNode == null){
+			return;
+		}else{
+			recursiveRemove(foundNode);
+		}
+	}
+    
+    private void recursiveRemove(Node<T> node) {
         if (node.isLeaf()) { //Caso seja folha, apenas muda o valor da data para null e faz o rebalanceamento de baixo para cima
             node.setData(null);
             rebalanceUp((Node<T>) node);
@@ -101,33 +82,231 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
     }
 
 
-    // AUXILIARY
-    protected void rebalanceUp(Node<T> node) {
-        Node<T> parent = (Node<T>) node.getParent();
-        
-        while (parent != null) { //Enquanto nao chegar na raiz, balanceia todos os nós acima deste
-            rebalance(parent);
-            parent =  parent.getParent();
-        }
+	@Override
+	public int height() {
+		return recursiveHeight(this.root) - 1;
+	}
+	public int recursiveHeight(Node<T> node){
+		if(!node.isNIL()){
+			int leftHeight = recursiveHeight(node.getLeft());
+			int rightHeight = recursiveHeight(node.getRight());
+			if(leftHeight > rightHeight){
+				return leftHeight + 1;
+			}else{
+				return rightHeight + 1; 
+			}
+		}else{
+			return 0;
+		}
+	}
+	@Override
+	public int size() {
+		return recursiveSize(this.root);
+	}
+	private int recursiveSize(Node<T> node){
+		if(!node.isNIL()){
+			return 1 + recursiveSize(node.getLeft()) + recursiveSize(node.getRight());
+		}else{
+			return 0;
+		}
+	}
 
-    }
+	@Override
+	public Node<T> search(T element) {
+		if(element == null || this.root.isNIL())
+			return null;
+		else{
+			return recursiveSearch(element,this.root);
+		}
+	}
+	private Node<T> recursiveSearch(T element,Node<T> node){
+		if(!node.isNIL()){
+			if(node.getData().equals(element)){
+				return node;
+			}else if(node.getData().compareTo(element) > 0){
+				return recursiveSearch(element,node.getLeft());
+			}else{
+				return recursiveSearch(element,node.getRight());
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public Node<T> maximum() {
+		if(size() == 0){
+			return null;
+		}else{
+			return recursiveMaximum(this.root);
+		}
+	}
+	
+	protected Node<T> recursiveMaximum(Node<T> node){
+		if(!node.getRight().isNIL()){
+			return recursiveMaximum(node.getRight());
+		}else{
+			return node;
+		}
+	}
 
+	@Override
+	public Node<T> minimum() {
+		if(size() == 0){
+			return null;
+		}else{
+			return recursiveMinimum(this.root);
+		}
+	}
+	
+	protected Node<T> recursiveMinimum(Node<T> node){
+		if(!node.getLeft().isNIL()){
+			return recursiveMinimum(node.getLeft());
+		}else{
+			return node;
+		}
+	}
+	
+	@Override
+	public Node<T> predecessor(T element) {
+		Node<T> foundNode = search(element);
+		if(foundNode == null){
+			return null;
+		}else if(!foundNode.getLeft().isNIL()){
+			return recursiveMaximum(foundNode.getLeft());
+		}else{
+			Node<T> parent = foundNode.getParent();
+			while(parent != null && !foundNode.equals(parent.getRight())){
+				parent = parent.getParent();
+				foundNode = foundNode.getParent();
+			}
+			return parent;
+		}
+	}
+
+	@Override
+	public Node<T> sucessor(T element) {
+		Node<T> foundNode = search(element);
+		if(foundNode == null){
+			return foundNode;
+		}else if(!foundNode.getRight().isNIL()){
+			return recursiveMinimum(foundNode.getRight());
+		}else{
+			Node<T> parent = foundNode.getParent();
+			while(parent != null && !foundNode.equals(parent.getLeft())){
+				parent = parent.getParent();
+				foundNode = foundNode.getParent();
+			}
+			return parent;
+		}
+	}
+	@Override
+	public T[] toArrayPreOrder() {
+		T[] array = (T[]) new Comparable[this.size()];
+		List<T> arrayList = new ArrayList<T>();
+		recursivePreOrder(this.root,arrayList);
+		for(int i = 0 ; i < arrayList.size();i++){
+			array[i] = arrayList.get(i);
+		}
+		return array;
+	}
+	private void recursivePreOrder(Node<T> node,List list){
+		if(!node.isNIL()){
+			list.add(node.getData());
+			recursivePreOrder(node.getLeft(),list);
+			recursivePreOrder(node.getRight(),list);
+		}
+	}
+
+	@Override
+	public T[] toArrayOrder() {
+		T[] array = (T[]) new Comparable[this.size()];
+		List<T> arrayList = new ArrayList<T>();
+		recursiveOrder(this.root,arrayList);
+		for(int i = 0 ; i < arrayList.size();i++){
+			array[i] = arrayList.get(i);
+		}
+		return array;
+		
+	}
+	private void recursiveOrder(Node<T> node,List list){
+		if(!node.isNIL()){
+			recursiveOrder(node.getLeft(),list);
+			list.add(node.getData());
+			recursiveOrder(node.getRight(),list);
+		}
+	}
+	@Override
+	public T[] toArrayPostOrder() {
+		T[] array = (T[]) new Comparable[this.size()];
+		List<T> arrayList = new ArrayList<T>();
+		recursiveOrder(this.root,arrayList);
+		for(int i = 0 ; i < arrayList.size();i++){
+			array[i] = arrayList.get(i);
+		}
+		return array;
+		
+	}
+	private void recursivePostOrder(Node<T> node,List list){
+		if(!node.isNIL()){
+			recursivePostOrder(node.getLeft(),list);
+			recursivePostOrder(node.getRight(),list);
+			list.add(node.getData());
+		}
+	}
+	protected void setRoot(Node<T> newRoot){
+		this.root = newRoot;
+	}
+	
+////////////////////////////////   AVL AUXILIAR METHODS 	//////////////////////////////////////////////////////////
+	
+	private int calculateBalance(Node<T> node){
+		if(node.isNIL())
+			return 0;
+		else{
+			return recursiveHeight(node.getLeft()) - recursiveHeight(node.getRight());
+		}
+	}
+	
+	private void rebalance(Node<T> node){
+		int balance = this.calculateBalance(node);
+		int leftBalance = this.calculateBalance(node.getLeft());
+		int rightBalance = this.calculateBalance(node.getRight());
+		if(balance > 1){
+			if(leftBalance < 0)
+				this.leftRotation(node.getLeft());
+			this.rightRotation(node);
+		}else if(balance < -1){
+			if(rightBalance > 0)
+				this.rightRotation(node.getRight());
+			this.leftRotation(node);
+		}
+	}
+	
+	private void rebalanceUp(Node<T> node){
+		Node<T> parent = node.getParent();
+		while(parent != null){
+			this.rebalance(node);
+			node = node.getParent();
+		}
+	}
+	
     // AUXILIARY
     protected void leftRotation(Node<T> node) {
-        Node<T> newRoot = leftRotationNodes(node); //Nó que ficou no lugar no rotacionado
-        if (node == getRoot()) { //Caso o rotacionado fosse o root
-            setRoot(newRoot);
+        Node<T> newRoot = leftRotationNodes(node);
+        if (node == getRoot()) {
+            this.root = newRoot;
         }
     }
 
 
     // AUXILIARY
     protected void rightRotation(Node<T> node) {
-        Node<T> newRoot = rightRotationNodes(node);//Nó que ficou no lugar no rotacionado
-        if (node == getRoot()) { //Caso o rotacionado fosse o root
-            setRoot(newRoot);
+        Node<T> newRoot = rightRotationNodes(node);
+        if (node == getRoot()) {
+        	this.root = newRoot;
         }
     }
+ 
     public static <T extends Comparable<T>> Node<T> rightRotationNodes(Node<T> node) {
 
         if (node != null && !node.isNIL()) {
@@ -156,6 +335,7 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
         }
         return null;
     }
+
     public static <T extends Comparable<T>> Node<T> leftRotationNodes(Node<T> node) {
 
         if (node != null && !node.isNIL()) {
@@ -185,4 +365,8 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
         return null;
     }
 
+	@Override
+	public Node<T> getRoot() {
+		return this.root;
+	}
 }

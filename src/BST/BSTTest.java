@@ -77,6 +77,7 @@ public class BSTTest {
 		//tests
 		Assert.assertEquals(new Integer(100), bst.maximum().getData());
 	}
+
 	
 	@Test
 	public void testMinimum(){
@@ -95,6 +96,7 @@ public class BSTTest {
 		bst.insert(new Integer(25));
 		Assert.assertEquals(new Integer(3), bst.minimum().getData());
 	}
+	
 	
 	@Test
 	public void testSucessor(){
@@ -120,6 +122,7 @@ public class BSTTest {
 		Assert.assertEquals(new Integer(30), bst.sucessor(new Integer(25)).getData());
 	}
 	
+	
 	@Test
 	public void testPredecessor(){
 		bst.insert(new Integer(10));
@@ -143,6 +146,7 @@ public class BSTTest {
 		Assert.assertEquals(new Integer(20), bst.predecessor(new Integer(25)).getData());
 	}
 
+	
 	@Test
 	public void testRemove() {
 		Assert.assertTrue(bst.isEmpty());
