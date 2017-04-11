@@ -5,7 +5,7 @@ package BST;
 
 /**
  * Node Class for Binary Search Tree Implementation
- * */
+ */
 public class Node<T> {
 	//Attributes
 	private T data;
@@ -77,28 +77,41 @@ public class Node<T> {
 	 * Set data value
 	 * @param value
 	 * */
-	public void setData(T value){
-		this.data = value;
+	public void setData(T element){
+		this.data = element;
 	}
 	/**
 	 * Set left node
-	 * @param newLeft
+	 * @param value
 	 * */
 	public void setLeft(Node<T>  newLeft){
 		this.left = newLeft;
 	}
 	/**
 	 * Set right node
-	 * @param newRight
+	 * @param value
 	 * */
 	public void setRight(Node<T> newRight){
 		this.right = newRight;
 	}
 	/**
 	 * Set parent node
-	 * @param newParent
+	 * @param value
 	 * */
 	public void setParent(Node<T> newParent){
 		this.parent = newParent;
+	}
+	
+	public boolean equals(Object obj) {
+		boolean resp = false;
+		if (obj instanceof Node) {
+			if (!this.isNIL() && !((Node<T>) obj).isNIL()) {
+				resp = this.data.equals(((Node<T>) obj).data);
+			} else {
+				resp = this.isNIL() && ((Node<T>) obj).isNIL();
+			}
+
+		}
+		return resp;
 	}
 }

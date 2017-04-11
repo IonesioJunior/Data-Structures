@@ -1,6 +1,12 @@
 package LinkedList.DoubleLinkedList;
 
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Double Linked List in recursive implementation
+ * */
 public class RecursiveDoubleLinkedList<T> implements DoubleLinkedListInterface<T> {
 	private T data;
 	private RecursiveDoubleLinkedList<T> next;

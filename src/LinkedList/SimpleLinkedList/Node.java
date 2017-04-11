@@ -1,5 +1,11 @@
 package LinkedList.SimpleLinkedList;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Single Linked List Node
+ * */
 public class Node<T> {
 	private Node<T> next;
 	private T data;

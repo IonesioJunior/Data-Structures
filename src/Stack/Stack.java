@@ -1,5 +1,11 @@
 package Stack;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Stack Implementation
+ * */
 public class Stack<T> implements StackInterface<T> {
 	private T[] array;
 	private int top = -1;

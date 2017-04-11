@@ -1,5 +1,11 @@
 package LinkedList.SimpleLinkedList;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Single Linked List in Recursive implementation
+ * */
 public class RecursiveLinkedList<T> implements LinkedListInterface<T> {
 	private T data;
 	private RecursiveLinkedList<T> next;

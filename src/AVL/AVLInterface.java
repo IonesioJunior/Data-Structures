@@ -3,6 +3,8 @@ package AVL;
  * @author Ionesio Junior
  * */
 
+import BST.Node;
+
 /**
  * AVL Interface
  * */

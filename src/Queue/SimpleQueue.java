@@ -1,5 +1,11 @@
 package Queue;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Queue in Circular implementation
+ * */
 public class SimpleQueue<T> implements QueueInterface<T>{
 	private T[] array;
 	private int tail;

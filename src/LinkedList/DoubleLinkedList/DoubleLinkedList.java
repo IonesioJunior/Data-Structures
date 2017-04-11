@@ -1,5 +1,11 @@
 package LinkedList.DoubleLinkedList;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Double Linked List in Iterative implementation
+ * */
 public class DoubleLinkedList<T> implements DoubleLinkedListInterface<T> {
 
 	private DoubleNode<T> head;

@@ -1,5 +1,11 @@
 package LinkedList.DoubleLinkedList;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Double Linked List Node
+ * */
 public class DoubleNode<T> {
 	private DoubleNode<T> next;
 	private DoubleNode<T> previous;

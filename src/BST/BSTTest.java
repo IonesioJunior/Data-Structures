@@ -226,7 +226,7 @@ public class BSTTest {
 		bst.insert(new Integer(5));
 		bst.insert(new Integer(3));
 		bst.insert(new Integer(2));
-		Assert.assertEquals(7, bst.height());
+		Assert.assertEquals(6, bst.height());
 		
 	}
 }

@@ -31,7 +31,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 		}
 	}
 
-	private void recursiveInsert(T element,Node<T> node,Node<T> parent){
+	protected void recursiveInsert(T element,Node<T> node,Node<T> parent){
 		if(!node.isNIL()){
 			if(node.getData().compareTo(element)> 0){
 				recursiveInsert(element,node.getLeft(),node);
@@ -55,7 +55,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 			recursiveRemove(foundNode);
 		}
 	}
-	private void recursiveRemove(Node<T> node){
+	protected void recursiveRemove(Node<T> node){
 		if(node.isLeaf()){
 			node.setData(null);
 			node.setLeft(null);
@@ -79,9 +79,9 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 
 	@Override
 	public int height() {
-		return recursiveHeight(this.root);
+		return recursiveHeight(this.root) - 1;
 	}
-	protected int recursiveHeight(Node<T> node){
+	public int recursiveHeight(Node<T> node){
 		if(!node.isNIL()){
 			int leftHeight = recursiveHeight(node.getLeft());
 			int rightHeight = recursiveHeight(node.getRight());
@@ -129,10 +129,14 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 	
 	@Override
 	public Node<T> maximum() {
-		return recursiveMaximum(this.root);
+		if(size() == 0){
+			return null;
+		}else{
+			return recursiveMaximum(this.root);
+		}
 	}
 	
-	public Node<T> recursiveMaximum(Node<T> node){
+	protected Node<T> recursiveMaximum(Node<T> node){
 		if(!node.getRight().isNIL()){
 			return recursiveMaximum(node.getRight());
 		}else{
@@ -142,10 +146,14 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 
 	@Override
 	public Node<T> minimum() {
-		return recursiveMinimum(this.root);
+		if(size() == 0){
+			return null;
+		}else{
+			return recursiveMinimum(this.root);
+		}
 	}
 	
-	private Node<T> recursiveMinimum(Node<T> node){
+	protected Node<T> recursiveMinimum(Node<T> node){
 		if(!node.getLeft().isNIL()){
 			return recursiveMinimum(node.getLeft());
 		}else{
@@ -246,9 +254,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 			list.add(node.getData());
 		}
 	}
-
-	public void setRoot(Node<T> pivot) {
-		this.root = pivot;
+	protected void setRoot(Node<T> newRoot){
+		this.root = newRoot;
 	}
-
 }

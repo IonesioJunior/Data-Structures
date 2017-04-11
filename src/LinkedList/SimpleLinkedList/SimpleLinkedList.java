@@ -1,5 +1,11 @@
 package LinkedList.SimpleLinkedList;
+/*
+ * @author Ionésio Junior
+ * */
 
+/*
+ * Single Linked List in iterative implementation
+ * */
 public class SimpleLinkedList<T> implements LinkedListInterface<T>{
 
 	private Node<T> head;

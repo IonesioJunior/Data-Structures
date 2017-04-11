@@ -1,8 +1,12 @@
 package Splay;
-
+/*
+ * @author Ionésio Junior
+ * */
 import BST.BST;
 import BST.Node;
-
+/*
+ * Splay Tree Implementation
+ * */
 public class SplayTreeImpl<T extends Comparable<T>> extends BST<T> implements SplayInterface<T> {
    
   	private void splay(Node<T> node) {

@@ -2,7 +2,9 @@ package SkipList;
 /*
  * @author Ionésio Junior
  * */
-
+/*
+ * Skip List Implementation
+ * */
 public class SkipList<T extends Comparable<T>> implements SkipListInterface<T> {
 	private SkipListNode<T> root;
 	private SkipListNode<T> NIL;
