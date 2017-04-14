@@ -8,118 +8,148 @@ import BST.Node;
  * Splay Tree Implementation
  * */
 public class SplayTreeImpl<T extends Comparable<T>> extends BST<T> implements SplayInterface<T> {
-   
-  	private void splay(Node<T> node) {
- 		if (node == null || node.isNIL()) return;
-  		
-  		while (!node.getData().equals(getRoot().getData())){
-  			if (node.getParent().getData().equals(getRoot().getData())){
-  				if(isRightChild(node)){
-  					leftRotation((Node<T>) node.getParent());
-  				}else{
-  					rightRotation((Node<T>) node.getParent());
-  				}
-  			}else if (isRightChild(node) && isRightChild((Node<T>) node.getParent())){
-  				leftRotation((Node<T>) node.getParent().getParent());
-  				leftRotation((Node<T>) node.getParent());
-  			}else if (!isRightChild(node) && !isRightChild((Node<T>) node.getParent())){
-  				rightRotation((Node<T>) node.getParent().getParent());
-  				rightRotation((Node<T>) node.getParent());
-  			}else if(!isRightChild(node) && isRightChild((Node<T>) node.getParent())){
-  				rightRotation((Node<T>) node.getParent());
-  				leftRotation((Node<T>) node.getParent());
-  			}else{
-  				leftRotation((Node<T>) node.getParent());
-  				rightRotation((Node<T>) node.getParent());
-  			}
-  		}
-  	}
-  	
-  	public boolean isRightChild(Node<T> node){
-  		return node.getParent().getRight().equals(node);
-  	}
-  	
-  	public void insert(T element){
-  		if (element == null) return;
-  		
-  		super.insert(element);
-  		splay(super.search(element));	
-  	}
-  	
-  	public Node<T> search(T element){
-  		if (element == null) return null;
-  		
-  		Node<T> buscado = super.search(element);
-  		if (buscado.isNIL()){
-  			splay((Node<T>) buscado.getParent());
-  		}else{
-  			splay(buscado);
-  		}
-  		return buscado;
-  	}
-  	
-  	public void remove(T element){
-  		if (element == null) return;
-  		if	(getRoot().isNIL()) return;
-  		if (super.search(element).isNIL()){
-  			if(!this.getRoot().getData().equals(element))
-  				splay((Node<T>) super.search(element).getParent());
-  		}else{
-  			T parent = null;
-  			if(!this.getRoot().getData().equals(element))
-  				parent = super.search(element).getParent().getData();
-  			super.remove(element);
-  			
-  			if(parent != null)
-  				splay(super.search(parent));
-  			}
-  	}
-  	
-  	public void rightRotation(Node<T> node){
-    		Node<T> newNode = this.right(node);
-    		if (newNode.getParent() == null){
-    			this.setRoot(newNode);
-    		}
-    	}
-   
-    public void leftRotation(Node<T> node){
-    		Node<T> newNode = this.left(node);
-    		if (newNode.getParent() == null){
-    			this.setRoot(newNode);
-    		}
-    	}
-    	
-   public  Node<T> left(Node<T> node) {
-  		Node<T> right = (Node<T>) node.getRight();
-   
-          node.setRight(right.getLeft());
-          right.getLeft().setParent(node);
-          right.setParent(node.getParent());
-          if (node.getParent() != null)
-          	if (node.getParent().getData().compareTo(right.getData()) > 0)
-          		node.getParent().setLeft(right);
-          	else{
-         		node.getParent().setRight(right);
-          	}
-          node.setParent(right);
-          right.setLeft(node);
-   
-          return right;
-  	}
-   
-   public  Node<T> right(Node<T> node) {
-  		Node<T> left = (Node<T>) node.getLeft();
-          node.setLeft(left.getRight());
-          left.getRight().setParent(node);
-          left.setParent(node.getParent());
-          if (node.getParent() != null)
-          	if (node.getParent().getData().compareTo(left.getData()) < 0)
-          		node.getParent().setRight(left);
-          	else {
-         		node.getParent().setLeft(left);
-          	}
-          node.setParent(left);
-          left.setRight(node);
-          return left;
-	   }
-  }
+    @Override
+    public Node<T> search(T element) {
+
+        if (element != null) {
+
+            Node<T> node = this.getRoot();
+            while (!node.isNIL()) {
+
+                if (node.getData().equals(element)) {
+                    splay((Node<T>) node);
+                    return (Node<T>) node;
+                } else if (node.getData().compareTo(element) > 0)
+                    node = node.getLeft();
+
+                else
+                    node = node.getRight();
+            }
+            if (node.getParent() != null)
+                splay((Node<T>) node.getParent());
+        }
+        return new Node<>();
+    }
+
+    public void insert(T element) {
+
+        if (element != null) {
+
+            insertRecursive(element, this.getRoot());
+        }
+    }
+
+    public void insertRecursive(T element, Node<T> node) {
+
+        if (node.isNIL()) {
+
+            node.setData(element);
+
+            Node<T> newLeft = new Node<>();
+            newLeft.setParent(node);
+            node.setLeft(newLeft);
+
+            Node<T> newRight = new Node<>();
+            newRight.setParent(node);
+            node.setRight(newRight);
+
+            if (node.getParent() != null)
+                splay((Node<T>) node);
+
+        } else if (node.getData().compareTo(element) > 0) {
+            insertRecursive(element, node.getLeft());
+
+        } else if (node.getData().compareTo(element) < 0) {
+            insertRecursive(element, node.getRight());
+        }
+    }
+
+    @Override
+    public void remove(T element) {
+
+        if (isEmpty() || element == null)
+            return;
+
+        else {
+
+            Node<T> node = super.search(element);
+
+            if (node.isNIL()) {
+                splay((Node<T>) node.getParent());
+                return;
+
+            } else {
+                Node<T> parent = (Node<T>) node.getParent();
+                recursiveRemove(node);
+                if (parent != null)
+                    splay(parent);
+            }
+        }
+    }
+
+    private void splay(Node<T> node) {
+
+        if (node == null || node.isNIL() || node.equals(getRoot()))
+            return;
+
+        Node<T> parent = (Node<T>) node.getParent();
+        Node<T> granParent = (Node<T>) parent.getParent();
+
+        while (parent != null) {
+
+            if (parent.equals(getRoot())) {
+
+                //ZIG Right
+                if (parent.getLeft().equals(node))
+                    Util.rightRotation(parent);
+
+                //ZIG Left
+                else
+                    Util.leftRotation(parent);
+
+                setRoot(node);
+
+            } else {
+
+                if (granParent.getRight().equals(parent)) {
+
+                    //ZIG_ZIG Left
+                    if (parent.getRight().equals(node)) {
+                        Util.leftRotation(granParent);
+                        Util.leftRotation(parent);
+                    }
+                        //ZIG Right ZAG Left
+                    else {
+                        Util.rightRotation(parent);
+                        Util.leftRotation(granParent);
+                    }
+                } else {
+
+                    //ZIG_ZIG Right
+                    if (parent.getLeft().equals(node)) {
+                        Util.rightRotation(granParent);
+                        Util.rightRotation(parent);
+                    }
+                        //ZIG Right ZAG Left
+                    else {
+                        Util.leftRotation(parent);
+                        Util.rightRotation(granParent);
+                    }
+                }
+            }
+
+            parent = (Node<T>) node.getParent();
+
+            if (parent != null) {
+
+                granParent = (Node<T>) parent.getParent();
+
+                if (parent.getParent() == null)
+                    setRoot(parent);
+            }
+
+            else
+                setRoot(node);
+        }
+    }
+}

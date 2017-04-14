@@ -62,10 +62,14 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 			node.setRight(null);
 		}else if(node.getLeft().isNIL()){
 			node.setData(node.getRight().getData());
+			node.getRight().getRight().setParent(node);
+			node.getRight().getLeft().setParent(node);
 			node.setLeft(node.getRight().getLeft());
 			node.setRight(node.getRight().getRight());
 		}else if(node.getRight().isNIL()){
 			node.setData(node.getLeft().getData());
+			node.getLeft().getRight().setParent(node);
+			node.getLeft().getLeft().setParent(node);
 			node.setRight(node.getLeft().getRight());
 			node.setLeft(node.getLeft().getLeft());
 		}else{
@@ -109,7 +113,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 	@Override
 	public Node<T> search(T element) {
 		if(element == null || this.root.isNIL())
-			return null;
+			return new Node<T>();
 		else{
 			return recursiveSearch(element,this.root);
 		}
@@ -124,7 +128,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 				return recursiveSearch(element,node.getRight());
 			}
 		}
-		return null;
+		return node;
 	}
 	
 	@Override
