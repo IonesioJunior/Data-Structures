@@ -33,6 +33,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 
 	protected void recursiveInsert(T element,Node<T> node,Node<T> parent){
 		if(!node.isNIL()){
+			if(node.getData().equals(element)) return;
 			if(node.getData().compareTo(element)> 0){
 				recursiveInsert(element,node.getLeft(),node);
 			}else{
@@ -49,7 +50,7 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 	@Override
 	public void remove(T element) {
 		Node<T> foundNode = search(element);
-		if(foundNode == null){
+		if(foundNode == new Node<T>()){
 			return;
 		}else{
 			recursiveRemove(foundNode);
@@ -168,7 +169,8 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 	@Override
 	public Node<T> predecessor(T element) {
 		Node<T> foundNode = search(element);
-		if(foundNode == null){
+		
+		if(foundNode.isNIL()){
 			return null;
 		}else if(!foundNode.getLeft().isNIL()){
 			return recursiveMaximum(foundNode.getLeft());
@@ -185,8 +187,8 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 	@Override
 	public Node<T> sucessor(T element) {
 		Node<T> foundNode = search(element);
-		if(foundNode == null){
-			return foundNode;
+		if(foundNode.isNIL()){
+			return null;
 		}else if(!foundNode.getRight().isNIL()){
 			return recursiveMinimum(foundNode.getRight());
 		}else{
@@ -199,6 +201,11 @@ public class BST<T extends Comparable<T>> implements BSTInterface<T> {
 		}
 	}
 
+	
+	
+	
+	
+	
 	@Override
 	public Node<T> getRoot() {
 		return this.root;

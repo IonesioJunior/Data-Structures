@@ -77,29 +77,30 @@ public class AVL<T extends Comparable<T>> extends BST<T> {
 
     @Override
     protected void recursiveRemove(Node<T> node) {
-
-        if (node.isLeaf()) {
-            node.setData(null);
-            rebalanceUp((Node<T>) node);
-
-        } else {
-
-            if (!node.getRight().isNIL()) {
-
-                Node<T> minNode = recursiveMinimum(node.getRight());
-                node.setData(minNode.getData());
-                recursiveRemove(minNode);
-
-            } else {
-
-                Node<T> maxNode = recursiveMinimum(node.getLeft());
-                node.setData(maxNode.getData());
-                recursiveRemove(maxNode);
-            }
-
-            rebalanceUp((Node<T>) node);
-
-        }
+    	if(!node.isNIL()){
+	        if (node.isLeaf()) {
+	            node.setData(null);
+	            rebalanceUp((Node<T>) node);
+	
+	        } else {
+	
+	            if (!node.getRight().isNIL()) {
+	
+	                Node<T> minNode = recursiveMinimum(node.getRight());
+	                node.setData(minNode.getData());
+	                recursiveRemove(minNode);
+	
+	            } else {
+	
+	                Node<T> maxNode = recursiveMinimum(node.getLeft());
+	                node.setData(maxNode.getData());
+	                recursiveRemove(maxNode);
+	            }
+	
+	            rebalanceUp((Node<T>) node);
+	
+	        }
+    	}
     }
 
 

@@ -21,7 +21,7 @@ public class BruteTest {
 
     private AVL<Integer> tree;
     private Node<Integer> NIL = new Node<Integer>();
-
+    
     private void fillTree() {
 
         for(int i = 0; i < 10 ; i++) {
@@ -40,16 +40,16 @@ public class BruteTest {
         assertEquals(0, tree.size());
         assertEquals(-1, tree.height());
 
-        System.out.println(tree.getRoot().getData());
-        //assertEquals(NIL, tree.getRoot());
+        
+        assertEquals(NIL, tree.getRoot());
 
         assertArrayEquals(new Integer[] {}, tree.toArrayOrder());
         assertArrayEquals(new Integer[] {}, tree.toArrayPreOrder());
         assertArrayEquals(new Integer[] {}, tree.toArrayPostOrder());
 
-        assertEquals(null, tree.search(12));
-        assertEquals(null, tree.search(-23));
-        assertEquals(null, tree.search(0));
+        assertEquals(NIL, tree.search(12));
+        assertEquals(NIL, tree.search(-23));
+        assertEquals(NIL, tree.search(0));
 
         assertEquals(null, tree.minimum());
         assertEquals(null, tree.maximum());
@@ -142,7 +142,7 @@ public class BruteTest {
 
         fillTree();
 
-        assertEquals(null, tree.search(-40));
+        assertEquals(NIL, tree.search(-40));
         assertEquals(new Integer(4), tree.search(4).getData());
     }
 

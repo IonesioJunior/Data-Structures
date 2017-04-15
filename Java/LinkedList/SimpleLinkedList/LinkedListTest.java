@@ -21,10 +21,10 @@ public class LinkedListTest {
 	
 	@Before
 	public void setUp(){
-		list1 = new DoubleLinkedList<Integer>();
-		list2 = new SimpleLinkedList<Integer>();
-		//list1 = new RecursiveDoubleLinkedList<Integer>();
-		//list2 = new RecursiveLinkedList<Integer>();
+		//list1 = new DoubleLinkedList<Integer>();
+		//list2 = new SimpleLinkedList<Integer>();
+		list1 = new RecursiveDoubleLinkedList<Integer>();
+		list2 = new RecursiveLinkedList<Integer>();
 	}
 	
 	@Test

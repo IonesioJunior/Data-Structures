@@ -17,17 +17,19 @@ import BST.BSTInterface;
 public class BSTTest {
 	
 	public BSTInterface<Integer> bst;
+	public Node<Integer> NIL;
 	@Before
 	public void setUp() throws Exception {
 		bst = new BST();
+		NIL = new Node<Integer>();
 	}
 
 	@Test
 	public void testSearch() {
-		Assert.assertNull(bst.search(new Integer(9)));
+		Assert.assertEquals(NIL,bst.search(new Integer(9)));
 		bst.insert(new Integer(9));
 		Assert.assertEquals(new Integer(9), bst.search(9).getData());
-		Assert.assertNull(bst.search(15));
+		Assert.assertEquals(NIL,bst.search(15));
 		bst.insert(new Integer(10));
 		bst.insert(new Integer(15));
 		bst.insert(new Integer(30));
@@ -35,7 +37,7 @@ public class BSTTest {
 		Assert.assertEquals(new Integer(10),bst.search(new Integer(10)).getData());
 		Assert.assertEquals(new Integer(15),bst.search(new Integer(15)).getData());
 		Assert.assertEquals(new Integer(7),bst.search(new Integer(7)).getData());
-		Assert.assertNull(bst.search(new Integer(45)));
+		Assert.assertEquals(NIL,bst.search(new Integer(45)));
 	}
 
 	@Test
@@ -161,12 +163,12 @@ public class BSTTest {
 		
 		bst.remove(new Integer(10));
 		Assert.assertEquals(new Integer(15), bst.getRoot().getData());
-		Assert.assertNull(bst.search(new Integer(10)));
+		Assert.assertEquals(new Node<Integer>(),bst.search(new Integer(10)));
 		bst.remove(new Integer(30));
 		Assert.assertEquals(new Integer(15), bst.getRoot().getData());
-		Assert.assertNull(bst.search(new Integer(30)));
+		Assert.assertEquals(new Node<Integer>(),bst.search(new Integer(30)));
 		bst.remove(new Integer(5));
-		Assert.assertNull(bst.search(new Integer(5)));
+		Assert.assertEquals(new Node<Integer>(),bst.search(new Integer(5)));
 		Assert.assertEquals(new Integer(7),bst.getRoot().getLeft().getData());
 		bst.remove(new Integer(20));
 		bst.remove(new Integer(15));
