@@ -102,7 +102,7 @@ public class RecursiveDoubleLinkedList<T> implements DoubleLinkedListInterface<T
 				this.next = next;
 				this.previous = next;
 			}else{
-				next = new RecursiveDoubleLinkedList<T>(this.data,this,this.next);
+				next = new RecursiveDoubleLinkedList<T>(this.data,this.next,this);
 				this.next.previous = next;
 				this.data = element;
 				this.next = next;
