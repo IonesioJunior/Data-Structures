@@ -159,8 +159,8 @@ class BinarySearchTree():
 	def __recursivePreOrder(self,array,node):
 		if(not(node.isEmpty())):
 			array.append(node.getData())
-			self.__recursivePreOrder(node.getLeft(),array)
-			self.__recursivePreOrder(node.getRight(),array)
+			self.__recursivePreOrder(array,node.getLeft())
+			self.__recursivePreOrder(array,node.getRight())
 			
 	
 	def toArrayOrder(self):
@@ -169,9 +169,9 @@ class BinarySearchTree():
 		return result
 	def __recursiveOrder(self,array,node):
 		if(not(node.isEmpty())):
-			self.__recursiveOrder(node.getLeft(),array)
+			self.__recursiveOrder(array,node.getLeft())
 			array.append(node.getData())
-			self.__recursiveOrder(node.getRight(),array)
+			self.__recursiveOrder(array,node.getRight())
 	
 	
 	
@@ -181,8 +181,8 @@ class BinarySearchTree():
 		return result
 	def __recursivePostOrder(self,array,node):
 		if(not(node.isEmpty())):
-			self.__recursivePostOrder(node.getLeft(),array)
-			self.__recursivePostOrder(node.getRight(),array)
+			self.__recursivePostOrder(array,node.getLeft())
+			self.__recursivePostOrder(array,node.getRight())
 			array.append(node.getData())
 	
 	def __setRoot(self,newRoot):
