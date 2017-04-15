@@ -17,7 +17,9 @@ public class SplayTreeImpl<T extends Comparable<T>> extends BST<T> implements Sp
             while (!node.isNIL()) {
 
                 if (node.getData().equals(element)) {
-                    splay((Node<T>) node);
+			if(!node.getData().equals(this.root.getData())){                    
+				splay((Node<T>) node);
+			}
                     return (Node<T>) node;
                 } else if (node.getData().compareTo(element) > 0)
                     node = node.getLeft();

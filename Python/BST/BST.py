@@ -32,9 +32,9 @@ class BinarySearchTree():
 	def remove(self,element):
 		foundNode = self.search(element)
 		if(not(foundNode.isEmpty())):
-			self.__recursiveRemove(foundNode)
+			self.recursiveRemove(foundNode)
 	
-	def __recursiveRemove(self,node):
+	def recursiveRemove(self,node):
 		if(node.isLeaf()):
 			node.setData(None)
 			node.setLeft(None)
@@ -56,7 +56,7 @@ class BinarySearchTree():
 			sucessor = self.sucessor(removedValue)
 			node.setData(sucessor.getData())
 			sucessor.setData(removedValue)
-			recursiveRemove(sucessor)
+			self.recursiveRemove(sucessor)
 	
 	def search(self,element):
 		if(element == None or self.__root.isEmpty()):
@@ -185,6 +185,6 @@ class BinarySearchTree():
 			self.__recursivePostOrder(array,node.getRight())
 			array.append(node.getData())
 	
-	def __setRoot(self,newRoot):
+	def setRoot(self,newRoot):
 		self.__root = newRoot
 			
