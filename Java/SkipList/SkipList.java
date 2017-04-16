@@ -73,12 +73,7 @@ public class SkipList<T extends Comparable<T>> implements SkipListInterface<T> {
 	public int height() {
 		int height = this.height - 1;
 		while(height >= 0 && this.root.getForward(height) == NIL){
-			if(height == 0){
-				height--;
-				break;
-			}else{
-				height--;
-			}
+			height--;
 		}
 		return height+ 1;
 	}
