@@ -2,6 +2,7 @@
 *@author Ionésio Junior
 */
 
+#include <iostream>
 #include <cstdlib>
 #include <vector>
 
@@ -122,8 +123,8 @@ void SingleLinkedList<T>::remove(T element){
 				SingleLinkedList<T> *removedNode = this->next;
 				this->data = this->next->data;
 				this->next = this->next->next;
-				removedNode = NULL;
 				free(removedNode);
+				removedNode = NULL;
 			}else{
 				return;
 			}
@@ -133,8 +134,8 @@ void SingleLinkedList<T>::remove(T element){
 	}else{
 		SingleLinkedList<T> *removedNode = this->next;
 		previous->next = previous->next->next;
-		removedNode = NULL;
 		free(removedNode);
+		removedNode = NULL;
 	}
 }
 
@@ -197,4 +198,4 @@ void SingleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
 	}
 }
 
-///////////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////////
