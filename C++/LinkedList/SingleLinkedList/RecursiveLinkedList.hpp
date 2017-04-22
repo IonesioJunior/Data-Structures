@@ -67,10 +67,14 @@ T SingleLinkedList<T>::getData(){
 
 template<class T>
 int SingleLinkedList<T>::size(){
-	if(!next){
-		return 1;	
+	if(!empty_root){	
+		if(!next){
+			return 1;	
+		}else{
+			return 1 + next->size();
+		}
 	}else{
-		return 1 + next->size();
+		return 0;	
 	}
 }
 
@@ -126,6 +130,7 @@ void SingleLinkedList<T>::remove(T element){
 				free(removedNode);
 				removedNode = NULL;
 			}else{
+				this->empty_root = true;
 				return;
 			}
 		}else{
@@ -179,7 +184,9 @@ T *SingleLinkedList<T>::getRoot(){
 template<class T>
 std::vector<T> SingleLinkedList<T>::toVector(){
 	std::vector<T> result;
-	this->recursiveToVector(&result);
+	if(!empty_root){
+		this->recursiveToVector(&result);
+	}	
 	return result;
 }
 
