@@ -32,7 +32,7 @@ In this repository you will find the following data structures:
 
 ## Tests
 
-for the validation test cases i used Junit for java , Unittest for python and lboost for C++.
+For validation test cases,has been used Junit for Java , Unittest for python and lboost for C++.
 
 ## Authors
 
