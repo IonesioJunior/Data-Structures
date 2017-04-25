@@ -15,9 +15,9 @@ class CircularQueue{
 		T *head_ptr;
 		int tail;
 		int head_index;
-	public:
 		int size;
 		int elements;
+	public:
 		CircularQueue(int size);
 		bool isEmpty();
 		bool isFull();
