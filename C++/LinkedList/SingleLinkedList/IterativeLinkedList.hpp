@@ -1,9 +1,7 @@
 /*
 *@author Ionésio Junior
 */
-#include <cstdlib>
-#include <vector>
-#include <iostream>
+#include "LinkedList.hpp"
 /*
 * Single Linked List in iterative implementation
 */
@@ -25,18 +23,18 @@ struct Node{
 */
 //SingleLinkedList.hpp
 template<class T>
-class SingleLinkedList{
+class SingleLinkedList : public LinkedList<T>{
 	private:
 		Node<T> *head;
 	public:
 		SingleLinkedList();
-		void insert(T element);
-		void remove(T element);
-		int size();
-		Node<T> *search(T element);
+		void insert(T element) override;
+		void remove(T element) override;
+		int size() override;
+		T *search(T element) override;
 		Node<T> *getHead();
-		std::vector<T> toVector();
-		bool isEmpty();
+		std::vector<T> toVector() override;
+		bool isEmpty() override;
 };
 
 //SingleLinkedList.cpp
@@ -143,15 +141,15 @@ int SingleLinkedList<T>::size(){
 /////////////////////////////////////////////////////////
 
 template<class T>
-Node<T> *SingleLinkedList<T>::search(T element){
+T *SingleLinkedList<T>::search(T element){
 	if(head){
 		if(this->head->data == element){
-			return this->head;
+			return &(this->head->data);
 		}else{
 			Node<T> *aux = this->head;
 			while(aux->next){
 				if(aux->next->data == element){
-					return aux->next;
+					return &(aux->next->data);
 				}
 				aux = aux->next;
 			}

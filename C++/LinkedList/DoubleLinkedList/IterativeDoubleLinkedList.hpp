@@ -2,9 +2,7 @@
 *@author Ionésio Junior
 */
 
-#include <cstdlib>
-#include <vector>
-
+#include "DoubleLinkedList.hpp"
 /*
 *Double Linked List node implementation
 */
@@ -40,23 +38,23 @@ struct Node{
 */
 //DoubleLinkedList.hpp
 template<class T>
-class DoubleLinkedList{
+class DoubleLinkedList : public LinkedList<T>{
 	private:
 		Node<T> *head;
 		Node<T> *tail;
-	
+		Node<T> *searchNode(T element);
 	public:
 		DoubleLinkedList();
-		bool isEmpty();
-		void insert(T element);
-		void remove(T element);
-		int size();
-		Node<T> *search(T element);
+		bool isEmpty() override;
+		void insert(T element) override;
+		void remove(T element) override;
+		int size() override;
+		T *search(T element);
 		Node<T> *getHead();
-		void insertFirst(T element);
-		void removeFirst();
-		void removeLast();
-		std::vector<T> toVector();
+		void insertFirst(T element) override;
+		void removeFirst() override;
+		void removeLast() override;
+		std::vector<T> toVector() override;
 	
 };
 
@@ -129,7 +127,7 @@ int DoubleLinkedList<T>::size(){
 ////////////////////////////////////////////////////////////
 
 template<class T>
-Node<T>* DoubleLinkedList<T>::search(T element){
+Node<T>* DoubleLinkedList<T>::searchNode(T element){
 	if(!isEmpty()){
 		Node<T> *aux = this->head;
 		while(aux != this->tail){
@@ -147,12 +145,33 @@ Node<T>* DoubleLinkedList<T>::search(T element){
 /////////////////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////////////////
+
+template<class T>
+T* DoubleLinkedList<T>::search(T element){
+	if(!isEmpty()){
+		Node<T> *aux = this->head;
+		while(aux != this->tail){
+			if(aux->data == element){
+				return &(aux->data);
+			}
+			aux = aux->next;
+		}
+		return NULL;
+	}else{
+		return NULL;
+	}
+}
+
+/////////////////////////////////////////////////////////////
+
+
 /////////////////////////////////////////////////////////////
 
 template<class T>
 void DoubleLinkedList<T>::remove(T element){
 	if(!isEmpty()){
-		Node<T> *foundNode = this->search(element);
+		Node<T> *foundNode = this->searchNode(element);
 		if(foundNode){
 			if(foundNode == this->head){
 				this->removeFirst();

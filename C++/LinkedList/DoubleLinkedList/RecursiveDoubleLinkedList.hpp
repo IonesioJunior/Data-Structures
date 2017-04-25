@@ -1,34 +1,33 @@
 /*
 *@author Ionésio Junior
 */
-#include <cstdlib>
-#include <vector>
-
+#include "DoubleLinkedList.hpp"
 /*
 *Recursive Double Linked List Implementation
 */
 //DoubleLinkedList.cpp
 template<class T>
-class DoubleLinkedList{
+class DoubleLinkedList : public LinkedList<T>{
 	private:
 		T data;
 		DoubleLinkedList<T> *next;
 		DoubleLinkedList<T> *previous;
+		DoubleLinkedList<T> *searchNode(T element);
 		bool head_empty;
 		void recursiveToVector(std::vector<T> *vetor);
 		DoubleLinkedList(T element,DoubleLinkedList<T> *previous);
 		DoubleLinkedList(T element,DoubleLinkedList<T> *next,DoubleLinkedList<T> *previous);
 	public:
 		DoubleLinkedList();
-		void insert(T element);
-		void remove(T element);
-		DoubleLinkedList<T> *search(T element);
-		int size();
-		std::vector<T> toVector();
-		void insertFirst(T element);
-		void removeFirst();
-		void removeLast();
-		bool isEmpty();
+		void insert(T element) override;
+		void remove(T element) override;
+		T *search(T element) override;
+		int size() override;
+		std::vector<T> toVector() override;
+		void insertFirst(T element) override;
+		void removeFirst() override;
+		void removeLast() override;
+		bool isEmpty() override;
 };
 
 
@@ -91,7 +90,7 @@ void DoubleLinkedList<T>::insert(T element){
 
 template<class T>
 void DoubleLinkedList<T>::remove(T element){
-	DoubleLinkedList<T> *foundNode = search(element);
+	DoubleLinkedList<T> *foundNode = searchNode(element);
 	if(foundNode){
 		if(data == element){
 			if(next){
@@ -127,7 +126,23 @@ void DoubleLinkedList<T>::remove(T element){
 ////////////////////////////////////////////////////////////////////
 
 template<class T>
-DoubleLinkedList<T> *DoubleLinkedList<T>::search(T element){
+T *DoubleLinkedList<T>::search(T element){
+	if(data == element){
+		return &(this->data);
+	}else if(next){
+		next->search(element);
+	}else{
+		return NULL;
+	}
+}
+
+////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////
+
+template<class T>
+DoubleLinkedList<T> *DoubleLinkedList<T>::searchNode(T element){
 	if(data == element){
 		return this;
 	}else if(next){

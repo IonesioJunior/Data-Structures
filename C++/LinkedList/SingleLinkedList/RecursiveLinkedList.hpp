@@ -2,16 +2,13 @@
 *@author Ionésio Junior
 */
 
-#include <iostream>
-#include <cstdlib>
-#include <vector>
-
+#include "LinkedList.hpp"
 /*
 * Recursive Linked List Implementation
 */
 //RecursiveLinkedList.hpp
 template<class T>
-class SingleLinkedList{
+class SingleLinkedList : public LinkedList<T>{
 	private:
 		T data;
 		SingleLinkedList<T> *next;
@@ -20,12 +17,13 @@ class SingleLinkedList{
 		void recursiveToVector(std::vector<T> * vetor);
 	public:
 		SingleLinkedList();
-		void insert(T element);
-		void remove(T element);
-		T *search(T element);
+		void insert(T element) override;
+		void remove(T element) override;
+		T *search(T element) override;
 		T *getRoot();
-		int size();
-		std::vector<T> toVector();
+		int size() override;
+		std::vector<T> toVector() override;
+		bool isEmpty() override;
 		SingleLinkedList *searchPrevious(T element);
 		T getData();
 };
@@ -52,6 +50,15 @@ SingleLinkedList<T>::SingleLinkedList(T element){
 
 /////////////////////////////////////////////////////////////
 
+
+/////////////////////////////////////////////////////////////
+
+template<class T>
+bool SingleLinkedList<T>::isEmpty(){
+	return this->empty_root;
+}
+
+/////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////
 

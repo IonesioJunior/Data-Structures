@@ -1,16 +1,14 @@
 /*
 *@author Ionésio Junior
 */
-
-#include <stdlib.h>
-#include <iostream>
-
+#include "Queue.hpp"
 //Queue.hpp
 /*
 * Simple Queue Implementation
 */
 
-template<typename T> class SimpleQueue{
+template<typename T> 
+class SimpleQueue : public Queue<T>{
 	private:
 		T *head_ptr;
 		T *tail;
@@ -18,11 +16,11 @@ template<typename T> class SimpleQueue{
 		void shiftLeft();
 	public:
 		SimpleQueue(int size);
-		bool isEmpty();
-		bool isFull();
-		void enqueue(T element);
-		T dequeue();
-		T head();		
+		bool isEmpty() override;
+		bool isFull() override;
+		void enqueue(T element) override;
+		T dequeue() override;
+		T head() override;		
 };
 
 

@@ -2,15 +2,14 @@
 *@author Ionésio Junior
 */
 
-#include <cstdlib>
-#include <iostream>
-
+#include "Queue.hpp"
 /*
 * Queue in circular implementation
 */
+
 //CircularQueue.hpp
 template<class T>
-class CircularQueue{
+class CircularQueue : public Queue<T>{
 	private:
 		T *head_ptr;
 		int tail;
@@ -19,11 +18,11 @@ class CircularQueue{
 		int elements;
 	public:
 		CircularQueue(int size);
-		bool isEmpty();
-		bool isFull();
-		void enqueue(T element);
-		T dequeue();
-		T head();
+		bool isEmpty() override;
+		bool isFull() override;
+		void enqueue(T element) override;
+		T dequeue() override;
+		T head() override;
 };
 
 //CircularQueue.cpp
