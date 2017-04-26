@@ -2,6 +2,7 @@
 *@author Ionésio Junior
 */
 #include "Queue.hpp"
+
 //Queue.hpp
 /*
 * Simple Queue Implementation
@@ -65,7 +66,7 @@ void SimpleQueue<T>::enqueue(T element){
 		this->tail++;
 		*this->tail = element;
 	}else{
-		std::cout << "Queue is Full!!" << std::endl;	
+		throw this->overflow;	
 	}
 }
 
@@ -82,8 +83,7 @@ T SimpleQueue<T>::dequeue(){
 		this->tail--;
 		return removedElement;
 	}else{
-		std::cout << "Queue is Empty!!" << std::endl;
-		return NULL;
+		throw this->underflow;
 	}
 }
 

@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include "Exception.hpp"
 
 //BinaryHeap.hpp
 template <typename T>
@@ -15,6 +16,7 @@ struct Array{
 
 template <typename T> class BinaryHeap{
 	private:
+		HeapUnderflowException underflow;
 		Array<T> array;
 		int index;
 		void buildHeap(Array<T> inputArray);
@@ -73,7 +75,7 @@ void BinaryHeap<T>::insert(T element){
 	if(this->isFull()){
 		this->responsiveArray();
 	}
-	if(element != NULL){
+	if(&element != NULL){
 		this->array.ptr[++index] = element;
 		int i = this->index;
 		while(i >= 0 && this->array.ptr[this->parent(i)] < this->array.ptr[i]){
@@ -82,6 +84,7 @@ void BinaryHeap<T>::insert(T element){
 			this->array.ptr[this->parent(i)] = aux;
 			i = this->parent(i);
 		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -92,7 +95,7 @@ void BinaryHeap<T>::insert(T element){
 template<typename T>
 T BinaryHeap<T>::extractRoot(){
 	if(this->isEmpty()){
-		std::cout << "HeapUnderflowException!!";
+		throw underflow;
 	}else{
 		T removedElement = *(this->array.ptr);
 		*(this->array.ptr) = this->array.ptr[this->index--];
@@ -140,7 +143,6 @@ void BinaryHeap<T>::buildHeap(Array<T> inputArray){
 	this->array.ptr= (T*) calloc(inputArray.size,sizeof(T));
 	this->array.size = inputArray.size;
 	this->index = -1;
-	this->showArray();
 	for(int i = 0; i < inputArray.size;i++){
 		this->insert(inputArray.ptr[i]);
 	}

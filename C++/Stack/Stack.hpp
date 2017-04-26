@@ -4,10 +4,14 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include "Exceptions.hpp"
 
 //Stack.hpp
-template <typename T> class Stack{
+template <typename T> 
+class Stack{
 	private:
+		StackOverflowException overflow;
+		StackUnderflowException underflow;
 		T *top_ptr;
 		T *begin;
 		int size;
@@ -27,8 +31,8 @@ template <typename T> class Stack{
 template<typename T>
 Stack<T>::Stack(int size){
 	this->size = size;
-	this->top_ptr = (T*) calloc(this->size,sizeof(T));
-	this->begin = this->top_ptr;
+	this->begin  = (T*) calloc(this->size,sizeof(T));
+	this->top_ptr = this->begin - 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -53,12 +57,12 @@ bool Stack<T>::isFull(){
 
 template <typename T>
 void Stack<T>::push(T element){
-	if(element != NULL){
+	if(&element != NULL){
 		if(!this->isFull()){
-			*this->top_ptr = element;
 			this->top_ptr++;
+			*this->top_ptr = element;
 		}else{
-			std::cout << "Stack is Full!!"<< std::endl;
+			throw overflow;
 		}
 	}
 }
@@ -71,9 +75,11 @@ void Stack<T>::push(T element){
 template <typename T>
 T Stack<T>::pop(){
 	if(!this->isEmpty()){
-		return *(--this->top_ptr);
+		T removedValue = *this->top_ptr;
+		--this->top_ptr;
+		return removedValue;
 	}else{
-		std::cout << "Stack is Empty!!" << std::endl;
+		throw underflow;
 	}
 }
 

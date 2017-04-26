@@ -45,8 +45,7 @@ CircularQueue<T>::CircularQueue(int size){
 template<class T>
 void CircularQueue<T>::enqueue(T element){
 	if(this->isFull()){
-		std::cout << "Queue is Full!!" << std::endl;
-		return;		
+		throw this->overflow;
 	}
 	if(&element){
 		this->elements++;
@@ -66,8 +65,7 @@ void CircularQueue<T>::enqueue(T element){
 template<class T>
 T CircularQueue<T>::dequeue(){
 	if(this->isEmpty()){
-		std::cout << "Queue is Empty!!" << std::endl;
-		return NULL;
+		throw this->underflow;
 	}
 	this->elements--;
 	T aux = this->head_ptr[this->head_index];
