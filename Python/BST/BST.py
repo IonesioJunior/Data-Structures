@@ -13,16 +13,16 @@ class BinarySearchTree():
 	
 	def insert(self,element):
 		if(element != None):
-			self.__recursiveInsert(element,self.__root,self.__root.getParent())
+			self.recursiveInsert(element,self.__root,self.__root.getParent())
 		
-	def __recursiveInsert(self,data,node,parent):
+	def recursiveInsert(self,data,node,parent):
 		if(not(node.isEmpty())):
 			if(node.getData() == data):
 				return
 			if(node.getData() > data):
-				self.__recursiveInsert(data,node.getLeft(),node)
+				self.recursiveInsert(data,node.getLeft(),node)
 			else:
-				self.__recursiveInsert(data,node.getRight(),node)
+				self.recursiveInsert(data,node.getRight(),node)
 		else:
 			node.setData(data)
 			node.setRight(Node())
@@ -76,12 +76,12 @@ class BinarySearchTree():
 			return node
 
 	def height(self):
-		return self.__recursiveHeight(self.__root) - 1
+		return self.recursiveHeight(self.__root) - 1
 	
-	def __recursiveHeight(self,node):
+	def recursiveHeight(self,node):
 		if(not(node.isEmpty())):
-			leftHeight = self.__recursiveHeight(node.getLeft())
-			rightHeight = self.__recursiveHeight(node.getRight())
+			leftHeight = self.recursiveHeight(node.getLeft())
+			rightHeight = self.recursiveHeight(node.getRight())
 			if(leftHeight > rightHeight):
 				return leftHeight + 1
 			else:
@@ -105,7 +105,7 @@ class BinarySearchTree():
 		else:
 			return self.__recursiveMaximum(self.__root)
 	
-	def __recursiveMaximum(self,node):
+	def recursiveMaximum(self,node):
 		if(not(node.getRight().isEmpty())):
 			return self.__recursiveMaximum(node.getRight())
 		else:
@@ -117,7 +117,7 @@ class BinarySearchTree():
 		else:
 			return self.__recursiveMinimum(self.__root)
 	
-	def __recursiveMinimum(self,node):
+	def recursiveMinimum(self,node):
 		if(not(node.getLeft().isEmpty())):
 			return self.__recursiveMinimum(node.getLeft())
 		else:
