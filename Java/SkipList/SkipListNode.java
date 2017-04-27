@@ -75,6 +75,10 @@ public class SkipListNode<T> {
 	
 	/////////////////////////		AUXILIAR METHODS		////////////////////////
 	
+	public void setForward(SkipListNode<T>[] newForward){
+		this.forward = newForward;
+	}
+	
   	private int countForwardsNotNull() {
   		int resp = 0;
   		for (int i = 0; i < forward.length; i++) {

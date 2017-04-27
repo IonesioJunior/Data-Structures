@@ -26,6 +26,7 @@ public class SkipList<T extends Comparable<T>> implements SkipListInterface<T> {
 	@Override
 	public void insert(int key, T newValue, int height) {
 		if(newValue != null){
+			this.ajustHeight(height);
 			SkipListNode<T>[] previousNodes = new SkipListNode[height];
 			SkipListNode<T> aux = this.root;
 			for(int i = height - 1 ; i >= 0;i--){
@@ -118,6 +119,24 @@ public class SkipList<T extends Comparable<T>> implements SkipListInterface<T> {
 	}
 	
 	///////////////////////   AUXILIAR METHODS		//////////////////////////////
+	
+	private void ajustHeight(int height){
+		if(height > this.height){
+			SkipListNode<T>[] rootArray = new SkipListNode[height];
+			this.NIL.setForward(new SkipListNode[height]);
+			for(int i = 0; i < height;i++){
+				if(i < this.height){
+					rootArray[i] = this.root.getForward(i);
+				}else{
+					rootArray[i] = this.NIL;
+				}
+			}
+			this.root.setForward(rootArray);
+			this.height = height;
+		}
+	}
+	
+	
 	private void changePointers(int height,SkipListNode[] previousNodes,SkipListNode<T> next){
 		for(int i = 0; i < height;i++){
 			if(previousNodes[i].getForward(i) == null){
