@@ -1,5 +1,8 @@
+#coding : utf-8
+import sys,os
+sys.path.append('../Operation/')
 '''
-	Author: Ionésio Junior
+	Author: Ionesio Junior
 '''
 from enum import Enum
 from Operation import *
@@ -50,4 +53,3 @@ class QuadraticProbing(object):
 	def hashMethod(self,element,prob):
 		generatedIndex = self.__operation.hashFunc(element)
 		return ((generatedIndex + self.__c1 * prob + self.__c2 * prob * prob) % self.__tableSize)
-

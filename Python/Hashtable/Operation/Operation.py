@@ -1,5 +1,5 @@
 '''
-	Author : Ionésio Junior
+	Author : Ionesio Junior
 '''
 from enum import Enum
 from math import sqrt

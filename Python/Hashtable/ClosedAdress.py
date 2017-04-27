@@ -1,5 +1,7 @@
+import sys,os
+sys.path.append('/Operation/')
 '''
-	Author: Ionésio Junior
+	Author: Ionesio Junior
 '''
 from Hashtable import Hashtable
 from Operation import Operation

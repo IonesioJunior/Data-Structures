@@ -1,3 +1,6 @@
+import sys,os
+sys.path.append('/Method/')
+sys.path.append('/Operation/')
 '''
 	Author: Ionésio Junior
 '''
