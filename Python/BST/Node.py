@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 
-
+'''
+	Node class implementation used Binary Search Tree/AVL/Splay
+'''
 class Node():
 	
 	def __init__(self,data=None,left=None,right=None,parent=None):

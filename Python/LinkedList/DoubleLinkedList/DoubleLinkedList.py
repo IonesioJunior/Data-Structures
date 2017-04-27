@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 from DoubleNode import DoubleNode
-
+'''
+	Double Linked List in iterative implementation
+'''
 class DoubleLinkedList():
 	
 	def __init__(self):

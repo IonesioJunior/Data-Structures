@@ -1,5 +1,11 @@
+'''
+	Author: Ionésio Junior
+'''
 #coding: utf-8
 
+'''
+	Binary Heap class implementation
+'''
 class BinaryHeap():
 	
 	def __init__(self):

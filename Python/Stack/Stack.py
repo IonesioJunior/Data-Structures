@@ -1,5 +1,11 @@
+'''
+	Author: Ionésio Junior
+'''
 #coding:utf-8
 
+'''
+	Stack Implementation
+'''
 class Stack():
 
 	def __init__(self,size = 10):

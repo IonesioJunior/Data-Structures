@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 #coding: utf-8
-
+'''
+	Simple Queue implementation
+'''
 class SimpleQueue():
 	
 	def __init__(self,size = 10):

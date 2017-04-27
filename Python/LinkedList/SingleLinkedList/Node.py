@@ -1,5 +1,11 @@
+'''
+	Author: Ionésio Junior
+'''
 
 
+'''
+	Node class implementation used in Iterative Single Linked List implementation
+'''
 class Node():
 	
 	def __init__(self,nextNode = None,data = None):

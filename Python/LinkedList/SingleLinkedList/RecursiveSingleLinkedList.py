@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 #coding: utf-8
-
+'''
+	Single Linked List in recursive implementation
+'''
 class RecursiveLinkedList():
 	
 	def __init__(self,data=None,nextNode=None):

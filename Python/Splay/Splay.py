@@ -1,8 +1,13 @@
+'''
+	Author: Ionésio Junior
+'''
 import sys,os
 sys.path.append('../BST/')
 from BST import BinarySearchTree
 from Node import Node
-
+'''
+	Slay Implementation
+'''
 class Splay(BinarySearchTree):
 		
 	def search(self,element):

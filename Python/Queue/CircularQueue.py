@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 #coding:utf -8
-
+'''
+	Circular Queue Implementation
+'''
 class CircularQueue():
 	
 	def __init__(self,size = 10):

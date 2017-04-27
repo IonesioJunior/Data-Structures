@@ -1,5 +1,11 @@
+'''
+	Author: Ionésio Junior
+'''
 from Node import Node
 
+'''
+	Single Linked List in iterative implementation
+'''
 class SimpleLinkedList():
 	
 	def __init__(self):

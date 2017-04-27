@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 
-
+'''
+	Double Node class implementation used in iterative Double Linked List
+'''
 class DoubleNode():
 	
 	def __init__(self,data=None,previous=None,nextNode=None):

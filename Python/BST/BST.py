@@ -1,5 +1,12 @@
+'''
+	Author: Ionésio Junior
+'''
+
 from Node import Node
 
+'''
+	BST class Implementation
+'''
 class BinarySearchTree():
 	
 	def __init__(self):

@@ -1,9 +1,14 @@
+'''
+	Author: Ionésio Junior
+'''
 import sys,os
 sys.path.append('../BST/')
 from BST import BinarySearchTree
 from Node import Node
 
-
+'''
+	AVL class Implementation
+'''
 class AVL(BinarySearchTree):
 	
 	def __calculateBalance(self,node):

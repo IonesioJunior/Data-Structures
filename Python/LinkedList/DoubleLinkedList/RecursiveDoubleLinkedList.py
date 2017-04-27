@@ -1,5 +1,10 @@
+'''
+	Author: Ionésio Junior
+'''
 
-
+'''
+	Double Linked List in recursive implementation
+'''
 class RecursiveDoubleLinkedList():
 		
 	def __init__(self,data = None,nextNode = None,previous = None):
