@@ -16,6 +16,7 @@ class SkipList(object):
 		self.__tail = Node(sys.maxint,maxHeight,None)
 		self.__connectHeadToTail()
 
+
 	def __connectHeadToTail(self):
 		for i in range(self.__height):
 			self.__head.setForwardNode(i,self.__tail)
@@ -37,6 +38,7 @@ class SkipList(object):
 			else:
 				aux = Node(key,height,data)
 				self.__changePointers(height,previousNodes,aux)
+
 	
 	def __changePointers(self,height,previousNodes,aux):
 		for i in range(height):
@@ -74,6 +76,7 @@ class SkipList(object):
 						break;
 				array[i].setForwardNode(i,aux.getForwardNode(i))
 
+
 	def search(self,key):
 		aux = self.__head
 		for i in range(self.__height - 1,-1,-1):
@@ -85,6 +88,7 @@ class SkipList(object):
 		else:
 			return None
 
+
 	def size(self):
 		count = 0
 		aux = self.__head.getForwardNode(0)
@@ -92,6 +96,7 @@ class SkipList(object):
 			count += 1
 			aux = aux.getForwardNode(0)
 		return count
+
 
 	def toList(self):
 		size = self.size() + 2
@@ -103,3 +108,11 @@ class SkipList(object):
 			aux = aux.getForwardNode(0)
 			index += 1
 		return nodeList
+
+	
+	def height(self):
+		height = self.__height - 1
+		while (height >= 0 and self.__head.getForwardNode(height).getValue() == None):
+			height -= 1
+		return height
+
