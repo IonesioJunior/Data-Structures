@@ -38,6 +38,10 @@ class SingleLinkedList : public LinkedList<T>{
 };
 
 //SingleLinkedList.cpp
+
+/*
+* Empty Constructor of linked list class
+*/
 ////////////////////////////////////////////////
 
 template<class T>
@@ -45,7 +49,10 @@ SingleLinkedList<T>::SingleLinkedList(){};
 
 ////////////////////////////////////////////////
 
-
+/*
+* Return true if list is empty or false,otherwise.
+* @return bool
+*/
 ////////////////////////////////////////////////
 
 template<class T>
@@ -59,7 +66,10 @@ bool SingleLinkedList<T>::isEmpty(){
 
 //////////////////////////////////////////////////
 
-
+/*
+* Get head of single linked list
+* @return Node
+*/
 //////////////////////////////////////////////////
 
 template<class T>
@@ -69,7 +79,10 @@ Node<T> *SingleLinkedList<T>::getHead(){
 
 //////////////////////////////////////////////////
 
-
+/*
+* Insert new element in list
+* @param new element
+*/
 ////////////////////////////////////////////////////
 
 template<class T>
@@ -89,6 +102,10 @@ void SingleLinkedList<T>::insert(T element){
 //////////////////////////////////////////////////////
 
 
+/*
+* Remove an list element
+* @param element to be removed
+*/
 //////////////////////////////////////////////////////
 
 template<class T>
@@ -117,7 +134,10 @@ void SingleLinkedList<T>::remove(T element){
 
 ////////////////////////////////////////////////////////
 
-
+/*
+* Return size of the list
+* @return int
+*/
 ////////////////////////////////////////////////////////
 
 template<class T>
@@ -137,7 +157,11 @@ int SingleLinkedList<T>::size(){
 
 /////////////////////////////////////////////////////////
 
-
+/*
+* Search an element, if found return your pointer, else return NULL
+* @param element to be searched
+* @return elementFound
+*/
 /////////////////////////////////////////////////////////
 
 template<class T>
@@ -162,7 +186,10 @@ T *SingleLinkedList<T>::search(T element){
 
 //////////////////////////////////////////////////////////
 
-
+/*
+* Return vector with all elements list
+* @return vector
+*/
 //////////////////////////////////////////////////////////
 
 template<class T>

@@ -28,6 +28,8 @@ struct Node {
         this->left = left;
         this->right = right;
     }
+	
+    Node(){};
 };
 
 //BST Class Implementation
@@ -58,6 +60,7 @@ class BinarySearchTree {
 	Node<T> *maximum();
 	Node<T> *minimum();
 	Node<T> *getRoot();
+	void setRoot(Node<T> *newRoot);
 	Node<T> *predecessor(T element);
 	Node<T> *sucessor(T element);
    	std::vector<T> order();
@@ -155,6 +158,14 @@ Node<T>* BinarySearchTree<T>::minimum(){
 
 ///////////////////////////////////////////////
 
+//////////////////////////////////////////////
+
+template<class T>
+void BinarySearchTree<T>::setRoot(Node<T> *newNode){
+	this->root = newNode;	
+}
+
+//////////////////////////////////////////////
 
 //////////////////////////////////////////////////
 

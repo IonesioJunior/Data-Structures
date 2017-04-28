@@ -4,10 +4,10 @@
 #include <cstdlib>
 #include <iostream>
 #include "Exceptions.hpp"
+
 /*
 * Queue Abstract class implementation
 */
-
 template<class T>
 class Queue{
 	public:

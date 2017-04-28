@@ -26,6 +26,11 @@ class SimpleQueue : public Queue<T>{
 
 
 //Queue.cpp
+
+/*
+* SimpleQueue class constructor
+* @params length of the queue
+*/
 ////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -37,7 +42,10 @@ SimpleQueue<T>::SimpleQueue(int size){
 
 ////////////////////////////////////////////////////////////
 
-
+/*
+* Return true if queue is empty or false,otherwise.
+* @return bool
+*/
 ///////////////////////////////////////////////////////////
 
 template<typename T>
@@ -47,7 +55,10 @@ bool SimpleQueue<T>::isEmpty(){
 
 //////////////////////////////////////////////////////////
 
-
+/*
+* Return true if queue is full or false,otherwise.
+* @return bool
+*/
 /////////////////////////////////////////////////////////
 
 template <typename T>
@@ -57,7 +68,11 @@ bool SimpleQueue<T>::isFull(){
 
 //////////////////////////////////////////////////////////
 
-
+/*
+* Insert a new element in tail of the queue or throw an exception if queue is full.
+* @param element
+* @throw QueueOverflowException
+*/
 /////////////////////////////////////////////////////////
 
 template <typename T>
@@ -73,6 +88,11 @@ void SimpleQueue<T>::enqueue(T element){
 /////////////////////////////////////////////////////////
 
 
+/*
+* Remove head element of the queue or throw an exception if queue is empty
+* @return element
+* @throw QueueUnderflowException
+*/
 /////////////////////////////////////////////////////////
 
 template <typename T>
@@ -89,7 +109,9 @@ T SimpleQueue<T>::dequeue(){
 
 ///////////////////////////////////////////////////////////
 
-
+/*
+* When an element is removed, this method move each element to the previous position.
+*/
 ///////////////////////////////////////////////////////////
 
 template<typename T>
@@ -101,7 +123,10 @@ void SimpleQueue<T>::shiftLeft(){
 
 //////////////////////////////////////////////////////////
 
-
+/*
+* Return element in the head of the queue without remove, or NULL if queue is empty.
+* @return element
+*/
 //////////////////////////////////////////////////////////
 
 template<typename T>
