@@ -1,6 +1,9 @@
+/*
+*@author Ionesio Junior
+*/
+
 #include <iostream>
 #include <exception>
-
 
 class StackOverflowException : public std::exception {
 	virtual const char* what() const throw(){

@@ -44,6 +44,7 @@ SimpleQueue<T>::SimpleQueue(int size){
 
 /*
 * Return true if queue is empty or false,otherwise.
+* Complexity : O(1)
 * @return bool
 */
 ///////////////////////////////////////////////////////////
@@ -57,6 +58,7 @@ bool SimpleQueue<T>::isEmpty(){
 
 /*
 * Return true if queue is full or false,otherwise.
+* Complexity : O(1)
 * @return bool
 */
 /////////////////////////////////////////////////////////
@@ -70,6 +72,7 @@ bool SimpleQueue<T>::isFull(){
 
 /*
 * Insert a new element in tail of the queue or throw an exception if queue is full.
+* Complexity : O(1)
 * @param element
 * @throw QueueOverflowException
 */
@@ -90,6 +93,7 @@ void SimpleQueue<T>::enqueue(T element){
 
 /*
 * Remove head element of the queue or throw an exception if queue is empty
+* Complexity : O(n)
 * @return element
 * @throw QueueUnderflowException
 */
@@ -125,6 +129,7 @@ void SimpleQueue<T>::shiftLeft(){
 
 /*
 * Return element in the head of the queue without remove, or NULL if queue is empty.
+* Complexity : O(1)
 * @return element
 */
 //////////////////////////////////////////////////////////

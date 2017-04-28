@@ -59,6 +59,7 @@ SingleLinkedList<T>::SingleLinkedList(T element){
 
 /*
 * Return true  if linked list is empty or false,otherwise.
+* Complexity : O(1)
 * @return bool
 */
 /////////////////////////////////////////////////////////////
@@ -85,6 +86,7 @@ T SingleLinkedList<T>::getData(){
 
 /*
 * Return size of list
+* Complexity : O(n)
 * @return int
 */
 ///////////////////////////////////////////////////////////////
@@ -106,6 +108,7 @@ int SingleLinkedList<T>::size(){
 
 /*
 * Search an element, if found return it return your pointer, else return NULL
+* Complexity : O(n)
 * @param element to be searched
 * @return elementFoundPointer
 */
@@ -126,6 +129,7 @@ T * SingleLinkedList<T>::search(T element){
 
 /*
 * Insert new element in last position of the list
+* Complexity : O(n)
 * @param new element
 */
 //////////////////////////////////////////////////////////////////
@@ -148,6 +152,7 @@ void SingleLinkedList<T>::insert(T element){
 
 /*
 * Remove an list element
+* Complexity : O(n)
 * @param element to be removed
 */
 ///////////////////////////////////////////////////////////////////
@@ -182,6 +187,7 @@ void SingleLinkedList<T>::remove(T element){
 
 /*
 * Search a previous node of element, or NULL if element isn't in the list
+* Complexity : O(n)
 * @param element
 * @return NodePointer 
 */
@@ -204,6 +210,7 @@ SingleLinkedList<T> *SingleLinkedList<T>::searchPrevious(T element){
 
 /*
 * Return head of the list
+* Complexity : O(1)
 * @return elementPointer
 */
 ////////////////////////////////////////////////////////////////////
@@ -221,6 +228,7 @@ T *SingleLinkedList<T>::getRoot(){
 
 /*
 * Return an vector with list elements
+* Complexity : O(n)
 * @return vector
 */
 /////////////////////////////////////////////////////////////////////

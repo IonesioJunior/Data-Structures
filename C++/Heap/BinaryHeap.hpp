@@ -13,8 +13,11 @@ struct Array{
 	T *ptr;
 };
 
-
-template <typename T> class BinaryHeap{
+/*
+* Binary Heap class
+*/
+template <typename T> 
+class BinaryHeap{
 	private:
 		HeapUnderflowException underflow;
 		Array<T> array;
@@ -36,6 +39,11 @@ template <typename T> class BinaryHeap{
 };
 
 //BinaryHeap.cpp
+
+/*
+* Binary Heap constructor
+* @param size
+*/
 //////////////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -47,7 +55,11 @@ BinaryHeap<T>::BinaryHeap(int size){
 
 //////////////////////////////////////////////////////////////////////
 
-
+/*
+* Return true if heap i empty or false,otherwise.
+* Complexity : O(1)
+* @return bool
+*/
 /////////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -57,7 +69,11 @@ bool BinaryHeap<T>::isEmpty(){
 
 /////////////////////////////////////////////////////////////////////
 
-
+/*
+* Return true if heap is full or false,otherwise.
+* Complexity : O(1)
+* @return bool
+*/
 ////////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -67,7 +83,11 @@ bool BinaryHeap<T>::isFull(){
 
 ////////////////////////////////////////////////////////////////////
 
-
+/*
+* Insert an element in leaf position,after correct your position by value
+* Complexity : O(log(n))
+* @param element
+*/
 ///////////////////////////////////////////////////////////////////
 
 template <typename T>
@@ -89,7 +109,11 @@ void BinaryHeap<T>::insert(T element){
 
 ///////////////////////////////////////////////////////////////////
 
-
+/*
+* Remove and return root element
+* Complexity : O(1)
+* @return elementPointer
+*/
 //////////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -106,7 +130,11 @@ T BinaryHeap<T>::extractRoot(){
 
 ////////////////////////////////////////////////////////////////////
 
-
+/*
+* Return root element value without remove it
+* Complexity: O(1)
+* @param element
+*/
 /////////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -118,6 +146,14 @@ T BinaryHeap<T>::rootElement(){
 	}
 }
 
+/////////////////////////////////////////////////////////////////
+
+/*
+* Sort an array using heap structure
+* Complexity : O(n.log(n))
+* @param unsorted array
+* @return sorted array
+*/
 /////////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -135,7 +171,10 @@ Array<T> BinaryHeap<T>::heapSort(Array<T> inputArray){
 
 ////////////////////////////////////////////////////////////////
 
-
+/*
+* Build heap structure using an array of elements
+* @param array of elements
+*/
 ////////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -183,7 +222,11 @@ int BinaryHeap<T>::right(int index){
 
 /////////////////////////////////////
 
-
+/*
+* Change node/left/right node positions using value of this nodes and raising the max value to the top
+* Complexity : O(log(n))
+* @param node
+*/
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 template<typename T>
@@ -211,7 +254,10 @@ void BinaryHeap<T>::heapify(int index){
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-
+/*
+* Duplicate storage size
+* Complexity : O(1)
+*/
 /////////////////////////////////////////////////////////////////////////
 
 template<typename T>

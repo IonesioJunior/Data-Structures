@@ -51,6 +51,7 @@ SingleLinkedList<T>::SingleLinkedList(){};
 
 /*
 * Return true if list is empty or false,otherwise.
+* Complexity : O(1)
 * @return bool
 */
 ////////////////////////////////////////////////
@@ -68,6 +69,7 @@ bool SingleLinkedList<T>::isEmpty(){
 
 /*
 * Get head of single linked list
+* Complexity : O(1)
 * @return Node
 */
 //////////////////////////////////////////////////
@@ -81,6 +83,7 @@ Node<T> *SingleLinkedList<T>::getHead(){
 
 /*
 * Insert new element in list
+* Complexity : O(n)
 * @param new element
 */
 ////////////////////////////////////////////////////
@@ -104,6 +107,7 @@ void SingleLinkedList<T>::insert(T element){
 
 /*
 * Remove an list element
+* Complexity : O(n)
 * @param element to be removed
 */
 //////////////////////////////////////////////////////
@@ -136,6 +140,7 @@ void SingleLinkedList<T>::remove(T element){
 
 /*
 * Return size of the list
+* Complexity : O(n)
 * @return int
 */
 ////////////////////////////////////////////////////////
@@ -159,6 +164,7 @@ int SingleLinkedList<T>::size(){
 
 /*
 * Search an element, if found return your pointer, else return NULL
+* Complexity : O(n)
 * @param element to be searched
 * @return elementFound
 */
@@ -188,6 +194,7 @@ T *SingleLinkedList<T>::search(T element){
 
 /*
 * Return vector with all elements list
+* Complexity : O(n)
 * @return vector
 */
 //////////////////////////////////////////////////////////

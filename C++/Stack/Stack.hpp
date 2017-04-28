@@ -45,6 +45,7 @@ Stack<T>::Stack(int size){
 
 /*
 * Return True if stack is empty or false,otherwise
+* Complexity: O(1)
 * @return bool
 */
 ///////////////////////////////////////////////////////////////////////////
@@ -58,6 +59,7 @@ bool Stack<T>::isEmpty(){
 
 /*
 * Return True if stack is full or false,otherwise
+* Complexity: O(1)
 * @return bool
 */
 ///////////////////////////////////////////////////////////////////////////
@@ -73,6 +75,7 @@ bool Stack<T>::isFull(){
 /*
 * Insert a new element in the top of stack or throw an exception if stack is full
 * null elements aren't allowed
+* Complexity : O(1)
 * @param element
 * @throw StackOverflowException
 */
@@ -95,6 +98,7 @@ void Stack<T>::push(T element){
 
 /*
 * Remove element in top of the stack of throw an exception if stack is empty.
+* Complexity: O(1)
 * @throw StackUnderflowException
 */
 //////////////////////////////////////////////////////////////////////////////
@@ -114,6 +118,7 @@ T Stack<T>::pop(){
 
 /*
 * Return the top  element of stack without remove this.(if stack is empty, return NULL).
+* Complexity: O(1)
 * @return element
 */
 ///////////////////////////////////////////////////////////////////////////////

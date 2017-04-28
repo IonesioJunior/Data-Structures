@@ -74,7 +74,10 @@ class BinarySearchTree {
 //BinarySearchTree.cpp
 /////////////////////////////////////////	PUBLIC METHODS		///////////////////////////////////////////////////////////////////////
 
-
+/*
+* Insert and element in leaf correct position
+* @param value
+*/
 /////////////////////////////////////////////////
 
 template<class T>
@@ -88,7 +91,10 @@ void BinarySearchTree<T>::insert(T val) {
 
 ////////////////////////////////////////////////
 
-
+/*
+* Return how many elements have in tree
+* @return size of tree
+*/
 ///////////////////////////////////////////////
 
 template<class T>
@@ -98,7 +104,10 @@ int BinarySearchTree<T>::size() {
 
 //////////////////////////////////////////////
 
-
+/*
+* Return max height of tree
+* @return maxHeight
+*/
 //////////////////////////////////////////////
 
 template<class T>
@@ -108,7 +117,10 @@ int BinarySearchTree<T>::height() {
 
 /////////////////////////////////////////////
 
-
+/*
+* Remove and element of the tree
+* @param element to be removed
+*/
 /////////////////////////////////////////////
 
 template<class T>
@@ -118,7 +130,11 @@ bool BinarySearchTree<T>::remove(T element) {
 
 /////////////////////////////////////////////
 
-
+/*
+* Search an specific element in the tree
+* @param value to be searched
+* @return FoundNodePointer / NULL
+*/
 /////////////////////////////////////////////////
 
 template<class T>
@@ -132,7 +148,10 @@ Node<T>* BinarySearchTree<T>::search(T val) {
 
 ////////////////////////////////////////////////
 
-
+/*
+* Return maximum element value in the three, or NULL if tree is empty
+* @return MaxNodePointer / NULL
+*/
 ///////////////////////////////////////////////
 template<class T>
 Node<T>* BinarySearchTree<T>::maximum(){
@@ -144,7 +163,9 @@ Node<T>* BinarySearchTree<T>::maximum(){
 }
 ///////////////////////////////////////////////
 
-
+/* Return minimum element value in the tree,or NULL if tree is empty
+*  @return MinNodePointer / NULL
+*/
 ///////////////////////////////////////////////
 
 template<class T>
@@ -157,6 +178,7 @@ Node<T>* BinarySearchTree<T>::minimum(){
 }
 
 ///////////////////////////////////////////////
+
 
 //////////////////////////////////////////////
 
@@ -176,7 +198,10 @@ Node<T> *BinarySearchTree<T>::getRoot(){
 
 ///////////////////////////////////////////////////
 
-
+/* Return a predecessor of element in tree,or NULL.
+* @param element 
+* @return NodePointer of predecessor
+*/
 ////////////////////////////////////////////////////
 
 template<class T>
@@ -198,7 +223,11 @@ Node<T> *BinarySearchTree<T>::predecessor(T element){
 
 ////////////////////////////////////////////////////
 
-
+/*
+* Return a sucessor of element in tree,or NULL.
+* @param elment
+* @return NodePointer of sucessor
+*/
 ////////////////////////////////////////////////////
 
 template<class T>
@@ -220,7 +249,11 @@ Node<T> *BinarySearchTree<T>::sucessor(T element){
 
 ////////////////////////////////////////////////////
 
-
+/*
+* Return an vector with BST elements in order (left,node,right)
+* Complexity : O(n)
+* @return vector with elements
+*/
 ////////////////////////////////////////////////////
 
 template<class T>
@@ -232,7 +265,11 @@ std::vector<T> BinarySearchTree<T>::order(){
 
 ////////////////////////////////////////////////////
 
-
+/*
+* Return an vector with BST elements in pre-order(node,left,right)
+* Complexity : O(n)
+* @return vector with elements
+*/
 ////////////////////////////////////////////////////
 
 template<class T>
@@ -244,7 +281,11 @@ std::vector<T> BinarySearchTree<T>::preOrder(){
 
 ////////////////////////////////////////////////////
 
-
+/*
+* Return an vector with BST elements in post-Order (left,right,node)
+* Complexity : O(n)
+* @return vector with elements
+*/
 ////////////////////////////////////////////////////
 
 template<class T>

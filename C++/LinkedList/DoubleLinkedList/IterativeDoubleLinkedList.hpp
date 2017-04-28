@@ -68,6 +68,7 @@ DoubleLinkedList<T>::DoubleLinkedList(){};
 
 /*
 * Return true if list is empty or false,otherwise.
+* Complexity : O(1)
 * @return bool
 */
 ///////////////////////////////////////////////////////////
@@ -85,6 +86,7 @@ bool DoubleLinkedList<T>::isEmpty(){
 
 /*
 * Insert new element in list
+* Complexity : O(1)
 * @param new element
 */
 ////////////////////////////////////////////////////////////
@@ -111,6 +113,7 @@ void DoubleLinkedList<T>::insert(T element){
 
 /*
 * Return size of the list
+* Complexity : O(n)
 * @return int
 */
 ////////////////////////////////////////////////////////////
@@ -134,6 +137,7 @@ int DoubleLinkedList<T>::size(){
 
 /*
 * Search an node, if found return your pointer, else return NULL
+* Complexity : O(n)
 * @param element to be searched
 * @return NodeFound
 */
@@ -159,6 +163,7 @@ Node<T>* DoubleLinkedList<T>::searchNode(T element){
 
 /*
 * Search an element, if found return your pointer, else return NULL
+* Complexity : O(n)
 * @param element to be searched
 * @return elementFound
 */
@@ -184,6 +189,7 @@ T* DoubleLinkedList<T>::search(T element){
 
 /*
 * Remove an list element
+* Complexity : O(n)
 * @param element to be removed
 */
 /////////////////////////////////////////////////////////////
@@ -209,6 +215,7 @@ void DoubleLinkedList<T>::remove(T element){
 
 /*
 * Return head of double linked list
+* Complexity : O(1)
 * @return NodePointer
 */
 //////////////////////////////////////////////////////////////
@@ -222,6 +229,7 @@ Node<T> *DoubleLinkedList<T>::getHead(){
 
 /*
 * Insert new element in head of linked list
+* Complexity : O(1)
 * @param element
 */
 //////////////////////////////////////////////////////////////
@@ -241,6 +249,7 @@ void DoubleLinkedList<T>::insertFirst(T element){
 
 /*
 * Remove the first element of the list
+* Complexity : O(1)
 */
 /////////////////////////////////////////////////////////////
 
@@ -264,6 +273,7 @@ void DoubleLinkedList<T>::removeFirst(){
 
 /*
 * Remove the last element of the list
+* Complexity : O(1)
 */
 //////////////////////////////////////////////////////////////
 
@@ -287,6 +297,7 @@ void DoubleLinkedList<T>::removeLast(){
 
 /*
 * Return vector with all elements list
+* Complexity : O(n)
 * @return vector
 */
 /////////////////////////////////////////////////////////////
