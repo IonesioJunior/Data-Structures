@@ -1,23 +1,51 @@
-'''
-	Author: Ionésio Junior
-'''
+#coding: utf-8
 
-'''
-	Double Linked List in recursive implementation
-'''
-class RecursiveDoubleLinkedList():
+__author__ = "Ionesio Junior"
+
+
+class RecursiveDoubleLinkedList(object):
+	'''
+		Double Linked List in recursive implementation	
 		
+		Attributes:
+			data(optional) : data of this node.
+			nextNode(RecursiveDoubleLinkedList) : next recursive node
+			previous(RecursiveDoubleLinkedList) : previous recursive node
+	'''	
+	__data = None;
+	__nextNode = None;
+	__previous = None;
+
 	def __init__(self,data = None,nextNode = None,previous = None):
+		''' Constructor of Recursive Double Linked List. Initialize attributes 
+		
+		    Args:
+			data(optional) : data value of this node
+			nextNode(RecursiveDoubleLinkedList) :  next recursive node
+			previous(RecursiveDoubleLinkedList) : previous recursive node
+		'''
 		self.__data = data
 		self.__nextNode = nextNode
 		self.__previous = previous
 	
 	
 	def isEmpty(self):
+		''' Return true if double linked list is empty or false,otherwise.
+		    Complexity: O(1)	
+	
+		    Returns:
+			boolean
+		'''
 		return (self.__data == None)
 	
 	
 	def size(self):
+		''' Return size of double linked list.
+		    Complexity: O(n)
+		
+		    Returns:
+			size(int) : how many elements have in double linked list
+		'''
 		if(self.isEmpty()):
 			return 0;
 		else:
@@ -25,6 +53,15 @@ class RecursiveDoubleLinkedList():
 	
 	
 	def search(self,element):
+		''' Search an specific element in list and return it if find or return None.
+		    Complexity: O(n)
+		
+		    Args:
+			element(optional) : element to be searched
+		
+		    Returns:
+			element(optional) : found element  / None
+		'''
 		if(self.isEmpty() or element == None):
 			return None
 		else:
@@ -35,6 +72,13 @@ class RecursiveDoubleLinkedList():
 	
 	
 	def insert(self,element):
+		''' Insert an element in last position of the double linked list.
+		    (None element aren't allowed).
+		    Complexity: O(n)
+		
+		    Args:
+			element(optional) : element to be inserted
+		'''
 		if(element != None):
 			if(self.isEmpty()):
 				self.__data = element
@@ -47,6 +91,12 @@ class RecursiveDoubleLinkedList():
 	
 	
 	def remove(self,element):
+		''' Remove an specific element in list.
+		    Complexity: O(n)
+			
+		   Args:
+			element(optional) : element to be removed
+		'''
 		if(element != None):
 			if(not(self.isEmpty())):
 				if(self.__data == element):
@@ -56,6 +106,12 @@ class RecursiveDoubleLinkedList():
 	
 	
 	def toArray(self):
+		''' Return an list with all of double linked list elements.
+		    Complexity = O(n)	
+
+		    Returns:
+			list[element] : all elements of list
+		'''
 		result = []	
 		if(self.size() > 0):
 			result.append(self.__data)
@@ -70,6 +126,13 @@ class RecursiveDoubleLinkedList():
 	
 	
 	def insertFirst(self,element):
+		''' Insert an element in first position of the list.
+		    (None element aren't allowed).
+		    Complexity = O(1);
+		
+		    Args:
+			element(optional) : element to be inserted
+		'''
 		if(element != None):
 			if(self.isEmpty()):
 				nextNode = RecursiveDoubleLinkedList()
@@ -83,6 +146,10 @@ class RecursiveDoubleLinkedList():
 				self.__nextNode = nextNode
 	
 	def removeFirst(self):
+		''' Remove the first element in list
+		    Complexity: O(1)
+		
+		'''
 		if(not(self.isEmpty())):
 			if(self.__nextNode.isEmpty()):
 				self.__data = None
@@ -94,6 +161,9 @@ class RecursiveDoubleLinkedList():
 				self.__nextNode = self.__nextNode.getNext()
 	
 	def removeLast(self):
+		''' Remove the last element in list
+		    Complexity: O(n)
+		'''
 		if(not(self.isEmpty())):
 			if(self.__nextNode.isEmpty()):
 				self.__data = None

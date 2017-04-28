@@ -24,7 +24,8 @@ class SimpleQueue():
 	def enqueue(self,element):
 		''' Insert new element in tail of the queue or raise and exception if queue is full 
 		    (None elements aren't allowed).
-			
+		    Complexity: O(1)			
+
 		    Args:
 			element(optional) : element to be inserted
 		
@@ -40,7 +41,8 @@ class SimpleQueue():
 	
 	def dequeue(self):
 		''' Remove and return element in head of the queue or raise and exception if queue is empty
-		
+		    Complexity: O(n)
+	
 		    Returns:
 			element(optional) : removed element
 		
@@ -66,7 +68,8 @@ class SimpleQueue():
 	def head(self):
 		''' Return the element of queue head without remove it.
 		    (If queue is Empty, return None).
-			
+		    Complexity: O(1)		
+	
 		    Returns:
 			element (optional): element in head position/None.
 		'''
@@ -78,7 +81,8 @@ class SimpleQueue():
 
 	def isEmpty(self):
 		''' Return true if queue is empty or false,otherwise.
-			
+		    Complexity: O(1)	
+	
 		    Returns:
 			boolean
 		'''
@@ -86,7 +90,8 @@ class SimpleQueue():
 	
 	def isFull(self):
 		'''Return true if queue is full or false,otherwise.
-		
+		   Complexity: O(1)
+	
 		   Returns:
 			boolean
 		'''

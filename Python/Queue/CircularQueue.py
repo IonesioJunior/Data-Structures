@@ -35,7 +35,8 @@ class CircularQueue():
 	def enqueue(self,element):
 		''' Insert new element in tail of queue or raise an exception if queue is full.
 		    (None elements aren't allowed).
-		
+		    Complexity: O(1)
+	
 		    Args:
 			element(optional) : element to be inserted
 		
@@ -56,7 +57,8 @@ class CircularQueue():
 				
 	def dequeue(self):
 		''' Remove  and return element in the head of the queue or raise an exception if queue is empty
-	
+		    Complexity : O(1)
+		
 		    Returns:
 			element (optional) : element removed.
 		
@@ -75,7 +77,8 @@ class CircularQueue():
 	def head(self):
 		''' Return element in the head of the queue without removed it.
 		    (Return None if queue is empty).
-			
+		    Complexity: O(1)		
+
 		    Returns:
 			element(optional) : head elment / None
 		'''
@@ -87,7 +90,8 @@ class CircularQueue():
 	
 	def isEmpty(self):
 		'''  Return true if queue is empty or false,otherwise.
-			
+		     Complexity: O(1)	     
+	
 		     Returns:
 			boolean
 		'''
@@ -96,7 +100,8 @@ class CircularQueue():
 	
 	def isFull(self):
 		''' Return true if queue is full or false,otherwise.
-			
+		    Complexity: O(1)			
+
 		    Returns:
 			boolean
 		'''

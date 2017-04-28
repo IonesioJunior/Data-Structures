@@ -1,13 +1,24 @@
-'''
-	Author: Ionésio Junior
-'''
+#coding: utf-8
+
+__author__ = "Ionesio Junior"
+
 from DoubleNode import DoubleNode
-'''
-	Double Linked List in iterative implementation
-'''
+
+
 class DoubleLinkedList():
+	''' Double Linked List in iterative implementation
 	
+           Attributes:
+		head(DoubleNode) :  head of double linked list
+		tail(DoubleNode) : tail of double linked list
+	'''
+	
+	__head = None;
+	__tail = None;
+
+
 	def __init__(self):
+		''' Empty Constructor of Double Linked List, initialize/connect head/tail Nodes'''
 		self.__head = DoubleNode()
 		self.__tail = DoubleNode()
 		self.__head.setNext(self.__tail)
@@ -15,10 +26,23 @@ class DoubleLinkedList():
 	
 	
 	def isEmpty(self):
+		''' Return true if linked list is empty or false,otherwise.
+		    Complexity: O(1)
+	
+		    Returns:
+			boolean
+		'''
 		return (self.__head.isEmpty())
 	
 	
 	def size(self):
+		''' Return the size of double linked list.
+		    Complexity : O(n)
+			
+		    Returns:
+			size(int) : How many element have in this linked list.
+			
+		'''
 		size = 0
 		aux = self.__head
 		while(not(aux.isEmpty())):
@@ -28,6 +52,16 @@ class DoubleLinkedList():
 	
 	
 	def search(self, element):
+		''' Search an specific element into this double linked list and return it if found or return None,otherwise.
+		    Complexity : O(n)
+			
+		    Args:
+			element(optional) : element to be searched
+		
+		    Returns:
+			element(optional) : found element  / None
+		
+		'''
 		if(element != None):
 			aux = self.__head
 			while(not(aux.isEmpty())):
@@ -36,6 +70,12 @@ class DoubleLinkedList():
 				aux = aux.getNext()
 	
 	def insert(self,element):
+		''' Insert an element in tail of double linked list.(None element aren't allowed).
+		    Complexity: O(1)
+
+		    Args:
+			element(optional) : element to be inserted
+		'''
 		if(element != None):
 			if(self.isEmpty()):
 				self.insertFirst(element)
@@ -44,7 +84,14 @@ class DoubleLinkedList():
 				self.__tail.setNext(node)
 				self.__tail = node
 	
+
 	def remove(self,element):
+		''' Remove an specific element from the list
+		    Complexity: O(n)
+		
+		    Args:
+			element(optional) : element to be removed
+		'''
 		if(element != None and not(self.isEmpty())):
 			if(self.__head.getData() == element):
 				self.removeFirst()
@@ -61,6 +108,12 @@ class DoubleLinkedList():
 	
 	
 	def toArray(self):
+		''' Return an list with all of list elements
+		    Complexity: O(n)
+			
+		   Returns:
+			list[elements] : all of double linked list elements.
+		'''
 		result = []
 		aux = self.__head
 		while(not(aux.isEmpty())):
@@ -70,6 +123,13 @@ class DoubleLinkedList():
 	
 	
 	def insertFirst(self,element):
+		''' Insert an element in first position of double linked list (None elements aren't allowed).
+		    Complexity: O(1)	 
+
+	
+		    Args;
+			elment(optional) : element to be inserted
+		'''
 		if(element != None):
 			if(self.isEmpty()):
 				newHead = DoubleNode(element, DoubleNode(),DoubleNode())
@@ -82,6 +142,9 @@ class DoubleLinkedList():
 	
 	
 	def removeFirst(self):
+		''' Remove the first element of double linked list.
+		    Complexity: O(1)
+		'''
 		if(self.isEmpty()):
 			return
 		else:
@@ -92,6 +155,9 @@ class DoubleLinkedList():
 	
 	
 	def removeLast(self):
+		''' Remove the last element of double linked list. 
+		    Complexity: O(1)
+		 '''
 		if(self.isEmpty()):
 			self.__tail.getPrevious().setNext(DoubleNode())
 			if(self.size() == 1):

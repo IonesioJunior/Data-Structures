@@ -26,7 +26,8 @@ class Stack():
 
 	def push(self,element):
 		''' Insert new element in the top of the stack or raise an exception if stack is full
-			
+		    Complexity: O(1)		
+
 		    Args:
 		 	element(optional) : element to be inserted
 		
@@ -42,7 +43,8 @@ class Stack():
 
 	def pop(self):
 		''' Remove element in top of the stack or raise an exception if stack is empty
-		    
+		    Complexity: O(1)
+
 		    Returns:
 			 removedElement(optional) : element removed
 		    Raises:
@@ -59,7 +61,8 @@ class Stack():
 
 	def top(self):
 		''' Return element in top of the stack without remove it, or return None if stack is empty
-		    
+		    Complexity : O(1)		    
+
 		   Returns:
 			element(optional) : element in top of the stack / None
 		'''
@@ -69,7 +72,8 @@ class Stack():
 			return None
 	def isEmpty(self):
 		''' Return true if stack is empty or false,otherwise.
-		
+		    Complexity: O(1)	
+	
 		    Returns:
 			boolean 
 		'''
@@ -78,7 +82,8 @@ class Stack():
 	
 	def isFull(self):
 		''' Return true if stack is full or false,otherwise
-		   
+		    Complexity: O(1)		   
+
                     Returns:
 			boolean
 		'''
