@@ -1,13 +1,30 @@
-'''
-	Author: Ionésio Junior
-'''
-#coding:utf -8
-'''
-	Circular Queue Implementation
-'''
+#coding:utf-8
+
+__author__ = "Ionésio Junior"
+
+
 class CircularQueue():
-	
+	''' Implementation of circular queue data structure
+           
+            Attributes:
+		queueArray[] : list of elements stored in structure
+		tail(int) : index of queue tail
+		head(int) : index of queue head
+		elements(int) : number of elements in queue
+		size(int) : total capacity of queue
+        '''
+	__queueArray  = None
+	__tail = None;
+	__head = None;
+	__elements = None;
+	__size = None;
+
 	def __init__(self,size = 10):
+		''' Queue Constructor initialize attributes with default value
+			
+		    Args:
+			size(int) : Size of queue list,Defaults to 10.
+		'''
 		self.__queueArray = []
 		self.__tail = -1
 		self.__head = -1
@@ -16,6 +33,15 @@ class CircularQueue():
 	
 	
 	def enqueue(self,element):
+		''' Insert new element in tail of queue or raise an exception if queue is full.
+		    (None elements aren't allowed).
+		
+		    Args:
+			element(optional) : element to be inserted
+		
+		    Raises:
+			Exception : When queue is Full
+		'''
 		if(self.isFull()):
 			raise Exception("Queue is Full!!")
 		else:
@@ -29,6 +55,14 @@ class CircularQueue():
 			
 				
 	def dequeue(self):
+		''' Remove  and return element in the head of the queue or raise an exception if queue is empty
+	
+		    Returns:
+			element (optional) : element removed.
+		
+		    Raises:
+			Exception: When queue is Empty
+		'''
 		if(self.isEmpty()):
 			raise Exception("Queue is Empty!!")
 		else:
@@ -39,6 +73,12 @@ class CircularQueue():
 		
 
 	def head(self):
+		''' Return element in the head of the queue without removed it.
+		    (Return None if queue is empty).
+			
+		    Returns:
+			element(optional) : head elment / None
+		'''
 		if(self.isEmpty()):
 			return None
 		else:
@@ -46,9 +86,19 @@ class CircularQueue():
 	
 	
 	def isEmpty(self):
+		'''  Return true if queue is empty or false,otherwise.
+			
+		     Returns:
+			boolean
+		'''
 		return (self.__elements == 0)
 	
 	
 	def isFull(self):
+		''' Return true if queue is full or false,otherwise.
+			
+		    Returns:
+			boolean
+		'''
 		return (self.__elements == self.__size)
 
