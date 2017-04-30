@@ -73,6 +73,9 @@ class QueueTest(unittest.TestCase):
 
 	def testEnqueue(self):
 		''' Test enqueue method (insert an element in tail of the queue) '''
+		
+		self.simpleQueue.enqueue(None)
+		self.circularQueue.enqueue(None)
 		#Default
 		self.assertEqual(True,self.simpleQueue.isEmpty())
 		self.assertEqual(True,self.circularQueue.isEmpty())

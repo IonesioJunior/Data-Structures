@@ -32,6 +32,8 @@ class SimpleQueue():
 		    Raises:
 			Exception: When queue is full
 		'''
+		if(element == None):
+			return;
 		if(not(self.isFull())):
 			self.__tail = self.__tail + 1
 			self.__queueList.insert(self.__tail,element)

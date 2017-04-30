@@ -65,6 +65,7 @@ class StackTest(unittest.TestCase):
 
 	def testPush(self):
 		''' Test push method (insert some element  at the top of the stack) '''
+		self.stack1.push(None)
 		self.assertEqual(True,self.stack1.isEmpty())
 		self.assertEqual(False,self.stack1.isFull())
 

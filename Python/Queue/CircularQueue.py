@@ -43,6 +43,8 @@ class CircularQueue():
 		    Raises:
 			Exception : When queue is Full
 		'''
+		if(element == None):
+			return;
 		if(self.isFull()):
 			raise Exception("Queue is Full!!")
 		else:

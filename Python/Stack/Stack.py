@@ -37,6 +37,8 @@ class Stack():
 		if(element != None and  not(self.isFull())):
 			self.__top = self.__top + 1
 			self.__stackList.insert(self.__top,element)
+		elif element == None:
+			return;
 		else:
 			raise Exception("Stack is Full!!")
 
