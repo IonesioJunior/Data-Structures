@@ -4,6 +4,9 @@ import unittest
 from CircularQueue import CircularQueue
 from SimpleQueue import SimpleQueue
 
+
+__author__ = "Ionesio Junior"
+
 class QueueTest(unittest.TestCase):
 	
 	
@@ -14,6 +17,7 @@ class QueueTest(unittest.TestCase):
 	
 	
 	def testIsEmpty(self):
+		''' Test empty queue cases '''
 		self.assertEqual(True,self.simpleQueue.isEmpty())
 		self.assertEqual(True,self.circularQueue.isEmpty())
 	
@@ -32,6 +36,7 @@ class QueueTest(unittest.TestCase):
 	
 	
 	def testIsFull(self):
+ 	  	''' Test full queue cases '''
 		self.assertEqual(False,self.simpleQueue.isFull())
 		self.assertEqual(False,self.circularQueue.isFull())
 	
@@ -50,6 +55,7 @@ class QueueTest(unittest.TestCase):
 
 
 	def testHead(self):
+		''' Test head method (acess head element without remove any element) '''
 		for i in range(10):
 			self.simpleQueue.enqueue(i)
 			self.circularQueue.enqueue(i)
@@ -66,6 +72,7 @@ class QueueTest(unittest.TestCase):
 		
 
 	def testEnqueue(self):
+		''' Test enqueue method (insert an element in tail of the queue) '''
 		#Default
 		self.assertEqual(True,self.simpleQueue.isEmpty())
 		self.assertEqual(True,self.circularQueue.isEmpty())
@@ -98,6 +105,7 @@ class QueueTest(unittest.TestCase):
 
 
 	def testDequeue(self):
+		''' Test dequeue method (remove first element inserted) First-in/First-out '''
 		#Default
 		self.assertEqual(True,self.simpleQueue.isEmpty())
 		self.assertEqual(True,self.circularQueue.isEmpty())
@@ -132,6 +140,7 @@ class QueueTest(unittest.TestCase):
 	
 	
 	def testException(self):
+		''' Test when exceptions should be raised '''
 		#UnderflowException
 		try:
 			self.simpleQueue.dequeue()
