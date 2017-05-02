@@ -57,13 +57,13 @@ class RecursiveLinkedList(object):
 		    Returns:
 			foundElement (optional) : found element / None.
 		'''
-		if(self.isEmpty()):
+		if(self.isEmpty() or element == None):
 			return None
 		else:
 			if(self.__data == element):
 				return self.__data
 			else:
-				return self.__next.search(element)
+				return self.__nextNode.search(element)
 	
 	
 	def insert(self,element):

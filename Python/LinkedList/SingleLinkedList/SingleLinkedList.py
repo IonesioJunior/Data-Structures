@@ -37,7 +37,7 @@ class SimpleLinkedList():
 		'''
 		size = 0
 		aux = self.__head
-		while(not(self.__head.isEmpty())):
+		while(not(aux.isEmpty())):
 			aux = aux.getNext()
 			size = size + 1
 		return size

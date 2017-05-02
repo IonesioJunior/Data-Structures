@@ -136,7 +136,7 @@ class DoubleLinkedList():
 				self.__head = newHead
 				self.__tail = newHead
 			else:
-				newHead = DoubleNode(element,DoubleNode(),self.__head())
+				newHead = DoubleNode(element,DoubleNode(),self.__head)
 				self.__head.setPrevious(newHead)
 				self.__head = newHead
 	
@@ -157,11 +157,12 @@ class DoubleLinkedList():
 	def removeLast(self):
 		''' Remove the last element of double linked list. 
 		    Complexity: O(1)
-		 '''
-		if(self.isEmpty()):
+		
+		'''
+		if(not(self.isEmpty())):
 			self.__tail.getPrevious().setNext(DoubleNode())
 			if(self.size() == 1):
-				self.__head = self.tail.getPrevious()
-			self.__tail = self.tail.getPrevious()
+				self.__head = self.__tail.getPrevious()
+			self.__tail = self.__tail.getPrevious()
 	
 		
