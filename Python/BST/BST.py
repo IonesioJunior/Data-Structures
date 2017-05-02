@@ -1,24 +1,37 @@
-'''
-	Author: Ionésio Junior
-'''
-
+#coding: utf-8
 from Node import Node
 
-'''
-	BST class Implementation
-'''
-class BinarySearchTree():
-	
+__author__ = "Ionesio Junior"
+
+
+class BinarySearchTree(object):
+	''' Binary Search Tree Class implementation
+		
+	   Attributes:
+		root(Node) : root of the tree	
+	'''	
 	def __init__(self):
+		''' BST constructor , initialize attributes '''
 		self.__root = Node();
 	
 	
 	def isEmpty(self):
+		''' Return true if bst is empty or false,otherwise 
+			
+		    Returns:
+			boolean
+		'''
 		return self.__root.isEmpty()
 
 	
 	
 	def insert(self,element):
+		''' Insert some element in correct leaf (left if element is lesser than the current node ,or right otherwise)
+		    (None / repeated element not allowed)
+
+		    Args:
+			element(optional) :element to be inserted
+		'''
 		if(element != None):
 			self.recursiveInsert(element,self.__root,self.__root.getParent())
 		
@@ -37,6 +50,15 @@ class BinarySearchTree():
 			node.setParent(parent)
 	
 	def remove(self,element):
+		''' Search an element and remove it.
+		    if found node is leaf -> only remove it
+		    if found node only one son -> replace your position using your son
+		    if found node have two sons -> replace your position using larger son
+		
+		    Args:
+			element(optional) : element to be removed
+		    
+		'''
 		foundNode = self.search(element)
 		if(not(foundNode.isEmpty())):
 			self.recursiveRemove(foundNode)
@@ -50,14 +72,12 @@ class BinarySearchTree():
 			node.setData(node.getRight().getData())
 			node.getRight().getRight().setParent(node)
 			node.getRight().getLeft().setParent(node)
-			node.setLeft(node.getRight().getLeft())
 			node.setRight(node.getRight().getRight())
 		elif(node.getRight().isEmpty()):
 			node.setData(node.getLeft().getData())
 			node.getLeft().getRight().setParent(node)
 			node.getLeft().getLeft().setParent(node)
 			node.setLeft(node.getLeft().getLeft())
-			node.setRight(node.getLeft().getRight())
 		else:
 			removedValue = node.getData()
 			sucessor = self.sucessor(removedValue)
@@ -66,6 +86,14 @@ class BinarySearchTree():
 			self.recursiveRemove(sucessor)
 	
 	def search(self,element):
+		''' Search an Node and return it,if not found return Empty Node
+		
+		    Args:
+			element(optional) : element to be searched
+			
+		   Returns:
+			Node(Node) : node with element value or empty node if value not found in tree
+		'''
 		if(element == None or self.__root.isEmpty()):
 			return Node()
 		else:
@@ -83,6 +111,11 @@ class BinarySearchTree():
 			return node
 
 	def height(self):
+		''' Return max height of this tree
+		
+		    Args:
+			height(int) : max height of this tree
+		'''
 		return self.recursiveHeight(self.__root) - 1
 	
 	def recursiveHeight(self,node):
@@ -97,6 +130,11 @@ class BinarySearchTree():
 			return 0
 	
 	def size(self):
+		''' Return how many elements have in this tree
+			
+		    Args:
+			size(int) : number of elements inside the tree
+		'''
 		return self.__recursiveSize(self.__root)
 	
 	def __recursiveSize(self,node):
@@ -107,36 +145,55 @@ class BinarySearchTree():
 	
 	
 	def maximum(self):
+		''' Return node with max element stored in current bst tree,or None if tree is empty
+		
+		   Args:
+			Node(Node/None) : node with max element stored/ None
+		'''
 		if(self.size() == 0):
 			return None
 		else:
-			return self.__recursiveMaximum(self.__root)
+			return self.recursiveMaximum(self.__root)
 	
 	def recursiveMaximum(self,node):
 		if(not(node.getRight().isEmpty())):
-			return self.__recursiveMaximum(node.getRight())
+			return self.recursiveMaximum(node.getRight())
 		else:
 			return node
 	
 	def minimum(self):
+		''' Return node with min element stored in current bst tree,or None if tree is empty
+		
+		    Args:
+			Node(Node/None) : node with min element stored / None
+		'''
 		if(self.size() == 0):
 			return None
 		else:
-			return self.__recursiveMinimum(self.__root)
+			return self.recursiveMinimum(self.__root)
 	
 	def recursiveMinimum(self,node):
 		if(not(node.getLeft().isEmpty())):
-			return self.__recursiveMinimum(node.getLeft())
+			return self.recursiveMinimum(node.getLeft())
 		else:
 			return node
 	
 	
 	def predecessor(self,element):
+		''' Return value of predecessor element of parameter element , or None if parameter element not found
+		    or parameter element is lesser element in the tree
+		
+		   Args:
+			element(optional) : search predecessor of this element
+		
+		   Returns:
+			element(optional/None) : predecessor value of parameter element  / None			
+		'''
 		foundNode = self.search(element)
 		if(foundNode.isEmpty()):
 			return None
 		elif(not(foundNode.getLeft().isEmpty())):
-			return self.__recursiveMaximum(foundNode.getLeft())
+			return self.recursiveMaximum(foundNode.getLeft())
 		else:
 			parent = foundNode.getParent()
 			while(parent != None and not(foundNode.getData() == parent.getRight().getData())):
@@ -145,11 +202,21 @@ class BinarySearchTree():
 			return parent
 	
 	def sucessor(self,element):
+                ''' Return value of sucessor element of parameter element , or None if parameter element not found
+                    or parameter element is larger element in the tree
+                
+                   Args:
+                        element(optional) : search sucessor of this element
+                
+                   Returns:
+                        element(optional/None) : sucessor value of parameter element  / None                 
+                '''
+
 		foundNode = self.search(element)
 		if(foundNode.isEmpty()):
 			return None
 		elif(not(foundNode.getRight().isEmpty())):
-			return self.__recursiveMinimum(foundNode.getRight())
+			return self.recursiveMinimum(foundNode.getRight())
 		else:
 			parent = foundNode.getParent()
 			while(parent != None and not(foundNode.getData() == parent.getLeft().getData())):
@@ -160,6 +227,11 @@ class BinarySearchTree():
 		return self.__root
 	
 	def toArrayPreOrder(self):
+		''' Return list structure with elements in order ->(node,left,right)
+		
+	            Returns:
+			result[optional] : elements in order ->(node,left,right)
+		'''
 		result = []
 		self.__recursivePreOrder(result,self.__root)
 		return result
@@ -171,6 +243,11 @@ class BinarySearchTree():
 			
 	
 	def toArrayOrder(self):
+		''' Return list structure with elements in order ->(left,node,right)
+		
+		    Returns:
+			result[optional] : elements in order ->(left,node,right)
+		'''
 		result = []
 		self.__recursiveOrder(result,self.__root)
 		return result
@@ -183,6 +260,11 @@ class BinarySearchTree():
 	
 	
 	def toArrayPostOrder(self):
+                ''' Return list structure with elements in order ->(left,right,node)
+                
+                    Returns:
+                        result[optional] : elements in order ->(left,right,node)
+                '''
 		result = []
 		self.__recursivePostOrder(result,self.__root)
 		return result

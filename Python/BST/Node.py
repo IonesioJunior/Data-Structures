@@ -1,12 +1,16 @@
-'''
-	Author: Ionésio Junior
-'''
+#coding: utf-8
+__author__ = "Ionesio Junior"
 
-'''
-	Node class implementation used Binary Search Tree/AVL/Splay
-'''
-class Node():
+class Node(object):
+	'''
+        Node class implementation used Binary Search Tree/AVL/Splay
 	
+	Attributes:
+		data(optional) : value stored in this node
+		left(Node) : left son of this node
+		right(Node) : right son of this node
+		parent(Node) : parent of this node
+	'''	
 	def __init__(self,data=None,left=None,right=None,parent=None):
 		self.__data=data
 		self.__left = left
@@ -42,4 +46,6 @@ class Node():
 		self.__parent = newParent
 
 		
-	
+	def __eq__(self,other):
+		''' Overload of == operation '''
+		return self.__data == other	
