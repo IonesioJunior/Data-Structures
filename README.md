@@ -4,7 +4,7 @@ Data Structures are abstract ways to organize, acess and manipulate every type o
 
 ## Language Implementations
 
-I implemented the same data structures in three different languages(Java,C++ and Python). The main objective of this, is explore the different characteristics of each language(pointers in c++,interfaces/abstract classes/polymorphism in Java and the fexibility of python) and fix algorithm idea of each data structure.
+I implemented the same data structures in three different languages(Java,C++ and Python). The main objective of this, is explore the different characteristics of each language(pointers in c++,interfaces/abstract classes/polymorphism in Java and the fexibility of python) and learn algorithm idea of each data structure.
 
 ### Structures
 
