@@ -1,17 +1,23 @@
+#coding : utf-8
 import sys,os
 sys.path.append('/Method/')
 sys.path.append('/Operation/')
-'''
-	Author: Ionésio Junior
-'''
 from Methods import *
 from Operation import *
-#coding: utf-8
 
-'''
-	Abstract Hashtable class
-'''
-class Hashtable():
+__author__ = "Ionesio Junior"
+
+
+class Hashtable(object):
+	''' Abstract hashtable class used in openadress/closedadress implementation 
+		
+	    Attributes:
+		table[] : list to store elements
+		elements(int) : how many elements have in internal table		
+		maxSize(int) : total capacity of table
+		COLLISIONS(int) : number of index collisions in insertions (openadress implementation only)
+		function(Linear/Quadratic/Multiplication/Division) : type of function used to generate hash, in openadress(linear/		  quadratic), in closedadress(multiplication/division)
+	'''
 	table = None
 	elements = None
 	__maxSize = None
@@ -19,6 +25,13 @@ class Hashtable():
 	function = None
 
 	def __init__(self,size,operation,method = None):
+		''' Hashtable constructor, initialize hashtable attributes
+		
+		    Args:
+			size(int) : size of internal table
+			operation(Enum Operation) : defines operation used to generate hashcode(DIVISION/MULTIPLICATION)
+			method(Enum Method/None): defines method used to generate hashcode(used only in openadress implementation)
+		'''
 		self.table = [None] * size
 		self.elements = 0
 		self.__tableSize = size
@@ -35,19 +48,24 @@ class Hashtable():
 				self.function = Division(self.__tableSize)
 		
 	def isEmpty(self):
+		''' Return true if internal table is empty or false,otherwise '''
 		return self.elements ==  0
 		
 	def isFull(self):
+		''' Return true if internal table is full or false,otherwise '''
 		return self.elements == self.__tableSize
 	
 	def capacity(self):
+		''' Return total capacity of internal table '''
 		return self.__tableSize
 	
 	
 	def size(self):
+		''' Return how many elements have in internal table '''
 		return self.elements
 	
 	def getCOLLISIONS(self):
+		''' Return how many collisions happened in insertions(only in openadress implementation) '''
 		return self.COLLISIONS	
 	
 	def insert(self,element):
