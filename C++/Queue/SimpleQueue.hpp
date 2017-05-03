@@ -1,3 +1,6 @@
+#ifndef _SIMPLEQUEUE_H_
+#define _SIMPLEQUEUE_H_
+
 /*
 *@author Ionésio Junior
 */
@@ -20,8 +23,8 @@ class SimpleQueue : public Queue<T>{
 		bool isEmpty() override;
 		bool isFull() override;
 		void enqueue(T element) override;
-		T dequeue() override;
-		T head() override;		
+		T* dequeue() override;
+		T* head() override;		
 };
 
 
@@ -100,12 +103,13 @@ void SimpleQueue<T>::enqueue(T element){
 /////////////////////////////////////////////////////////
 
 template <typename T>
-T SimpleQueue<T>::dequeue(){
+T* SimpleQueue<T>::dequeue(){
 	if(!this->isEmpty()){
-		T removedElement = *this->head_ptr;
+		T removedElement = *(this->head_ptr);
 		this->shiftLeft();
 		this->tail--;
-		return removedElement;
+		this->tail[1] = removedElement;
+		return &this->tail[1];
 	}else{
 		throw this->underflow;
 	}
@@ -135,12 +139,14 @@ void SimpleQueue<T>::shiftLeft(){
 //////////////////////////////////////////////////////////
 
 template<typename T>
-T SimpleQueue<T>::head(){
+T* SimpleQueue<T>::head(){
 	if(!this->isEmpty()){
-		return *this->head_ptr;
+		return this->head_ptr;
 	}else{
 		return NULL;
 	}
 }
 
 ///////////////////////////////////////////////////////////
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef _CIRCULARQUEUE_H_
+#define _CIRCULARQUEUE_H_
 /*
 *@author Ionésio Junior
 */
@@ -21,8 +23,8 @@ class CircularQueue : public Queue<T>{
 		bool isEmpty() override;
 		bool isFull() override;
 		void enqueue(T element) override;
-		T dequeue() override;
-		T head() override;
+		T* dequeue() override;
+		T* head() override;
 };
 
 //Queue.cpp
@@ -58,14 +60,12 @@ void CircularQueue<T>::enqueue(T element){
 	if(this->isFull()){
 		throw this->overflow;
 	}
-	if(&element){
-		this->elements++;
-		if(this->head_index == -1 && this->tail == -1){
-			this->head_index = (this->head_index + 1 ) % this->size;
-		}
-		this->tail = (this->tail + 1 ) % this->size;
-		this->head_ptr[this->tail] = element;
+	this->elements++;
+	if(this->head_index == -1 && this->tail == -1){
+		this->head_index = (this->head_index + 1 ) % this->size;
 	}
+	this->tail = (this->tail + 1 ) % this->size;
+	this->head_ptr[this->tail] = element;
 }
 
 ///////////////////////////////////////////
@@ -79,12 +79,12 @@ void CircularQueue<T>::enqueue(T element){
 ///////////////////////////////////////////
 
 template<class T>
-T CircularQueue<T>::dequeue(){
+T* CircularQueue<T>::dequeue(){
 	if(this->isEmpty()){
 		throw this->underflow;
 	}
 	this->elements--;
-	T aux = this->head_ptr[this->head_index];
+	T* aux = &this->head_ptr[this->head_index];
 	this->head_index = (this->head_index + 1) % size;
 	return aux;
 }
@@ -100,11 +100,11 @@ T CircularQueue<T>::dequeue(){
 /////////////////////////////////////////////
 
 template<class T>
-T CircularQueue<T>::head(){
+T* CircularQueue<T>::head(){
 	if(this->isEmpty()){
 		return NULL;
 	}else{
-		return this->head_ptr[this->head_index];
+		return &this->head_ptr[this->head_index];
 	}
 }
 
@@ -139,3 +139,5 @@ bool CircularQueue<T>::isFull(){
 }
 
 //////////////////////////////////////////////////
+
+#endif

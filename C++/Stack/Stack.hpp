@@ -20,8 +20,8 @@ class Stack{
 		bool isEmpty();		
 		bool isFull();
 		void push(T element);
-		T pop();
-		T top();		
+		T* pop();
+		T* top();		
 };
 
 
@@ -83,14 +83,12 @@ bool Stack<T>::isFull(){
 
 template <typename T>
 void Stack<T>::push(T element){
-	if(&element != NULL){
 		if(!this->isFull()){
 			this->top_ptr++;
 			*this->top_ptr = element;
 		}else{
 			throw overflow;
 		}
-	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -104,9 +102,9 @@ void Stack<T>::push(T element){
 //////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
-T Stack<T>::pop(){
+T* Stack<T>::pop(){
 	if(!this->isEmpty()){
-		T removedValue = *this->top_ptr;
+		T* removedValue = this->top_ptr;
 		--this->top_ptr;
 		return removedValue;
 	}else{
@@ -124,9 +122,9 @@ T Stack<T>::pop(){
 ///////////////////////////////////////////////////////////////////////////////
 
 template <typename T>
-T Stack<T>::top(){
+T* Stack<T>::top(){
 	if(!this->isEmpty()){
-		return *(this->top_ptr - 1);
+		return (this->top_ptr);
 	}else{
 		return NULL;
 	}
