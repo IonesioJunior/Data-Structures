@@ -1,16 +1,23 @@
-'''
-	Author: Ionésio Junior
-'''
+
 import sys,os
 sys.path.append('../BST/')
 from BST import BinarySearchTree
 from Node import Node
-'''
-	Slay Implementation
-'''
+
+__author__ = "Ionesio Junior"
+
+
 class Splay(BinarySearchTree):
-		
+	''' Splay Tree implementation '''		
 	def search(self,element):
+		''' Search an element and return if found it (move node to the root),or 
+		    return empty Node(return parent to the top)
+			
+		   Args:
+			element(optional) : element to be searched
+		   Returns:
+			Node(Node) :  Node with element value or empty node
+		'''
 		if(element != None):
 			node = self.getRoot()
 			while(not(node.isEmpty())):
@@ -28,6 +35,13 @@ class Splay(BinarySearchTree):
 	
 	
 	def insert(self,element):
+		''' Insert an element in splay tree and move it to the splay root
+		    (not allowed None/repeated elements)
+			
+	
+		    Args:
+			element(optional) : element to be inserted
+   		'''
 		if(element != None):
 			node = self.getRoot()
 			while(not(node.isEmpty())):
@@ -45,10 +59,15 @@ class Splay(BinarySearchTree):
 				self.__splay(node)
 
 	def remove(self,element):
+		''' Search element and remove it (move parent node to the root),if not found Node move parent of last node visited			to the top.
+			
+		    Args:
+			element(optional) : element to be removed
+		
+		'''
 		if(element != None):
 			foundNode = self.search(element)
 			if(foundNode.isEmpty()):
-				self.__splay(foundNode.getParent())
 				return
 			else:
 				parent = foundNode.getParent()
@@ -59,8 +78,15 @@ class Splay(BinarySearchTree):
 
 
 	def __splay(self,node):
-		if(node == None or node.isEmpty() or node.getData == self.getRoot().getData()):
+		''' Move specific node to the top of the splay tree
+
+		    Args:
+			Node(Node) : node to be moved to the top
+		
+		'''
+		if(node == None or node.isEmpty() or node.getData() == self.getRoot().getData()):
 			return
+		
 		parent = node.getParent()
 		grandParent = parent.getParent()
 		
@@ -97,6 +123,7 @@ class Splay(BinarySearchTree):
 
 	
 	def __leftRotation(self,node):
+		''' Left Rotation algorithm implementation '''
 		if(node != None and not(node.isEmpty())):
 			parent = node.getParent()
 			right = node.getRight()
@@ -117,6 +144,7 @@ class Splay(BinarySearchTree):
 			return right
 	
 	def __rightRotation(self,node):
+		''' Right rotation algorithm implementation'''
 		if(node != None and not(node.isEmpty())):
 			parent = node.getParent()
 			left = node.getLeft()
