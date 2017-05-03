@@ -1,3 +1,6 @@
+#ifndef _SKIPLIST_H_
+#define _SKIPLIST_H_
+
 /*
 *@author Ionesio Junior
 */
@@ -86,7 +89,6 @@ void SkipList<T,K>::connectHeadToTail(){
 
 template<class T,class K>
 void SkipList<T,K>::insert(K key,T element,int height){
-	if(&element){
 		this->ajustHeight(height);
 		Node<T,K> *previousNodes[height];	
 		Node<T,K> *aux = this->head;
@@ -103,7 +105,6 @@ void SkipList<T,K>::insert(K key,T element,int height){
 			aux = new Node<T,K>(element,key,height);
 			this->changePointers(height,previousNodes,aux);			
 		}
-	}
 }
 
 /////////////////////////////////////////////////////
@@ -239,3 +240,4 @@ void SkipList<T,K>::changePointers(int height,Node<T,K> *previousNodes[],Node<T,
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#endif
