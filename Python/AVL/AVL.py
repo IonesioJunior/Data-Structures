@@ -1,17 +1,22 @@
-'''
-	Author: Ionésio Junior
-'''
+#coding : utf-8
 import sys,os
 sys.path.append('../BST/')
 from BST import BinarySearchTree
 from Node import Node
 
-'''
-	AVL class Implementation
-'''
+__author__ = "Ionesio Junior"
+
+
 class AVL(BinarySearchTree):
-	
+	''' AVL Class implementation (extends Binary Search Tree implementation) '''
 	def __calculateBalance(self,node):
+		''' Calculate balance of some node
+			
+		   Args:
+			node(Node) : node to be calculate
+		   Returns:
+			balance(int) : result of balance difference of left / right sons
+		'''
 		if(node.isEmpty()):
 			return 0;
 		else:
@@ -19,6 +24,19 @@ class AVL(BinarySearchTree):
 	
 
 	def __rebalance(self,node):
+		''' This method rebalance tree 	(max dif allowed of balance in any node is 1)
+		    rebalance order (node -> leaf)
+			
+		    types of rebalance:
+			left -> single left rotation	
+			right -> single right rotation
+			leftRight -> first left rotation of left son of node.After right rotation of node
+			RightLeft -> first right rotation of right son of node.After left rotation of node
+
+		    Args:
+			node(Node) : node to be rebalanced
+		
+		'''
 		balance = self.__calculateBalance(node)
 		balanceLeft = self.__calculateBalance(node.getLeft())
 		balanceRight = self.__calculateBalance(node.getRight())
@@ -34,6 +52,14 @@ class AVL(BinarySearchTree):
 	
 
 	def recursiveInsert(self,element,node,parent):
+		''' The only difference of this method to the father method is 
+			a call for rebalance method in each recursive call
+		
+			Args:
+				element(optional) : element to be inserted
+				node(Node) : current node in recursiveInsert method
+				parent(Node) : parent of current Node
+		'''
 		if(node.isEmpty()):
 			node.setData(element)
 			node.setLeft(Node())
@@ -51,12 +77,18 @@ class AVL(BinarySearchTree):
 
 
 	def recursiveRemove(self,node):
+		''' The only difference of this method to the father method is 
+			a call for rebalanceUp when an element is removed
+		
+			Args:
+				node(Node) : node to be removed
+		'''
 		if(not(node.isEmpty())):
 			if(node.isLeaf()):
 				node.setData(None)
 				self.__rebalanceUp(node)
 			else:
-				if(not(node.getRight.isEmpty())):
+				if(not(node.getRight().isEmpty())):
 					minNode = self.recursiveMinimum(node.getRight())
 					node.setData(minNode.getData())
 					self.recursiveRemove(minNode)
@@ -68,6 +100,11 @@ class AVL(BinarySearchTree):
 
 
 	def __rebalanceUp(self,node):
+		''' Rebalance the tree in order (leaf -> root) 
+		
+		    Args:
+			node(Node) : parent node will be rebalanced
+		'''
 		parent = node.getParent()
 		while(parent != None):
 			self.__rebalance(parent)
@@ -88,6 +125,11 @@ class AVL(BinarySearchTree):
 
 
 	def __leftRotationNodes(self,node):
+		''' Left Rotation algorithm implementation
+		
+		    Args:
+			node(Node) : node that will be undergo left rotation
+		'''
 		if(node != None and not(node.isEmpty())):
 			parent = node.getParent()
 			right = node.getRight()
@@ -109,6 +151,11 @@ class AVL(BinarySearchTree):
 
 	
 	def __rightRotationNodes(self,node):
+		''' Right Rotation algorithm implementation
+		
+		   Args:
+			node(Node) : node that will be undergor right roation
+		'''
 		if(node != None and not(node.isEmpty())):
 			parent = node.getParent()
 			left = node.getLeft()
