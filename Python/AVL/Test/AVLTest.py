@@ -10,6 +10,9 @@ from Node import Node
 import unittest
 from math import *
 
+__author__ = "Ionesio Junior"
+
+
 class SplayTest(unittest.TestCase):
 	
 	
