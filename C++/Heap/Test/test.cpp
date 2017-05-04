@@ -26,7 +26,7 @@ struct setUp{
 	int oddOrdered[9] = {1,2,3,4,5,6,7,8,9};
 };
 
-BOOST_FIXTURE_TEST_SUITE(SkipListTest,setUp)
+BOOST_FIXTURE_TEST_SUITE(HeapTest,setUp)
 BOOST_AUTO_TEST_CASE(testInit){
 	BOOST_CHECK(true == heap->isEmpty());
 	BOOST_CHECK(false == heap->isFull());
