@@ -1,3 +1,6 @@
+#ifndef _LINKEDLIST_H_
+#define _LINKEDLIST_H_
+
 /*
 *@author Ionésio Junior
 */
@@ -19,4 +22,4 @@ class LinkedList{
 		virtual std::vector<T> toVector() = 0;
 		virtual bool isEmpty() = 0;
 };
-
+#endif

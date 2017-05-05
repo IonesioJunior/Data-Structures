@@ -1,3 +1,5 @@
+#ifndef _RECURSIVELIST_H_
+#define _RECURSIVELIST_H_
 /*
 *@author Ionésio Junior
 */
@@ -8,15 +10,15 @@
 */
 //RecursiveLinkedList.hpp
 template<class T>
-class SingleLinkedList : public LinkedList<T>{
+class RecursiveSingleLinkedList : public LinkedList<T>{
 	private:
 		T data;
-		SingleLinkedList<T> *next;
-		SingleLinkedList(T element);
+		RecursiveSingleLinkedList<T> *next;
+		RecursiveSingleLinkedList(T element);
 		bool empty_root;
 		void recursiveToVector(std::vector<T> * vetor);
 	public:
-		SingleLinkedList();
+		RecursiveSingleLinkedList();
 		void insert(T element) override;
 		void remove(T element) override;
 		T *search(T element) override;
@@ -24,7 +26,7 @@ class SingleLinkedList : public LinkedList<T>{
 		int size() override;
 		std::vector<T> toVector() override;
 		bool isEmpty() override;
-		SingleLinkedList *searchPrevious(T element);
+		RecursiveSingleLinkedList *searchPrevious(T element);
 		T getData();
 };
 
@@ -37,7 +39,7 @@ class SingleLinkedList : public LinkedList<T>{
 //////////////////////////////////////////////////////////////
 
 template<class T>
-SingleLinkedList<T>::SingleLinkedList(){
+RecursiveSingleLinkedList<T>::RecursiveSingleLinkedList(){
 	this->empty_root = true;
 }
 
@@ -50,7 +52,7 @@ SingleLinkedList<T>::SingleLinkedList(){
 //////////////////////////////////////////////////////////////
 
 template<class T>
-SingleLinkedList<T>::SingleLinkedList(T element){
+RecursiveSingleLinkedList<T>::RecursiveSingleLinkedList(T element){
 	this->data = element;
 	this->empty_root = false;
 }
@@ -65,7 +67,7 @@ SingleLinkedList<T>::SingleLinkedList(T element){
 /////////////////////////////////////////////////////////////
 
 template<class T>
-bool SingleLinkedList<T>::isEmpty(){
+bool RecursiveSingleLinkedList<T>::isEmpty(){
 	return this->empty_root;
 }
 
@@ -78,7 +80,7 @@ bool SingleLinkedList<T>::isEmpty(){
 //////////////////////////////////////////////////////////////
 
 template<class T>
-T SingleLinkedList<T>::getData(){
+T RecursiveSingleLinkedList<T>::getData(){
 	return this->data;
 }
 
@@ -92,7 +94,7 @@ T SingleLinkedList<T>::getData(){
 ///////////////////////////////////////////////////////////////
 
 template<class T>
-int SingleLinkedList<T>::size(){
+int RecursiveSingleLinkedList<T>::size(){
 	if(!empty_root){	
 		if(!next){
 			return 1;	
@@ -115,9 +117,18 @@ int SingleLinkedList<T>::size(){
 /////////////////////////////////////////////////////////////////
 
 template<class T>
-T * SingleLinkedList<T>::search(T element){
+T * RecursiveSingleLinkedList<T>::search(T element){
 	if(data == element){
-		return &data;	
+		RecursiveSingleLinkedList<T> *previous = this->searchPrevious(element);
+		if(previous){
+			return &data;
+		}else{
+			if(this->empty_root){
+				return NULL;			
+			}else{
+				return &data;			
+			}		
+		}	
 	}else if(!next){
 		return NULL;	
 	}else{
@@ -135,13 +146,15 @@ T * SingleLinkedList<T>::search(T element){
 //////////////////////////////////////////////////////////////////
 
 template<class T>
-void SingleLinkedList<T>::insert(T element){
+void RecursiveSingleLinkedList<T>::insert(T element){
 	if(this->empty_root){
 		this->data = element;
 		this->empty_root = false;
+		this->next = NULL;
 	}else{
 		if(!next){
-			this->next = new SingleLinkedList<T>(element);
+			this->next = new RecursiveSingleLinkedList<T>(element);
+			this->next->next = NULL;
 		}else{
 			this->next->insert(element);
 		}
@@ -158,12 +171,12 @@ void SingleLinkedList<T>::insert(T element){
 ///////////////////////////////////////////////////////////////////
 
 template<class T>
-void SingleLinkedList<T>::remove(T element){
-	SingleLinkedList<T> *previous = this->searchPrevious(element);
+void RecursiveSingleLinkedList<T>::remove(T element){
+	RecursiveSingleLinkedList<T> *previous = this->searchPrevious(element);
 	if(!previous){
 		if(data == element){
 			if(next){
-				SingleLinkedList<T> *removedNode = this->next;
+				RecursiveSingleLinkedList<T> *removedNode = this->next;
 				this->data = this->next->data;
 				this->next = this->next->next;
 				free(removedNode);
@@ -176,7 +189,7 @@ void SingleLinkedList<T>::remove(T element){
 			return;
 		}
 	}else{
-		SingleLinkedList<T> *removedNode = this->next;
+		RecursiveSingleLinkedList<T> *removedNode = previous->next;
 		previous->next = previous->next->next;
 		free(removedNode);
 		removedNode = NULL;
@@ -194,7 +207,7 @@ void SingleLinkedList<T>::remove(T element){
 ////////////////////////////////////////////////////////////////////
 
 template<class T>
-SingleLinkedList<T> *SingleLinkedList<T>::searchPrevious(T element){
+RecursiveSingleLinkedList<T> *RecursiveSingleLinkedList<T>::searchPrevious(T element){
 	if(!next){
 		return NULL;	
 	}else{
@@ -216,7 +229,7 @@ SingleLinkedList<T> *SingleLinkedList<T>::searchPrevious(T element){
 ////////////////////////////////////////////////////////////////////
 
 template<class T>
-T *SingleLinkedList<T>::getRoot(){
+T *RecursiveSingleLinkedList<T>::getRoot(){
 	if(this->empty_root){
 		return NULL;
 	}else{
@@ -234,7 +247,7 @@ T *SingleLinkedList<T>::getRoot(){
 /////////////////////////////////////////////////////////////////////
 
 template<class T>
-std::vector<T> SingleLinkedList<T>::toVector(){
+std::vector<T> RecursiveSingleLinkedList<T>::toVector(){
 	std::vector<T> result;
 	if(!empty_root){
 		this->recursiveToVector(&result);
@@ -250,7 +263,7 @@ std::vector<T> SingleLinkedList<T>::toVector(){
 //////////////////////////////////////////////////////////////////////
 
 template<class T>
-void SingleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
+void RecursiveSingleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
 	if(next){
 		vetor->push_back(data);
 		next->recursiveToVector(vetor);
@@ -260,3 +273,4 @@ void SingleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
 }
 
 ///////////////////////////////////////////////////////////////////////
+#endif

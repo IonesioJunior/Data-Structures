@@ -1,3 +1,5 @@
+#ifndef _ITERATIVELIST_H_
+#define _ITERATIVELIST_H_
 /*
 *@author Ionésio Junior
 */
@@ -23,11 +25,11 @@ struct Node{
 */
 //SingleLinkedList.hpp
 template<class T>
-class SingleLinkedList : public LinkedList<T>{
+class IterativeSingleLinkedList : public LinkedList<T>{
 	private:
 		Node<T> *head;
 	public:
-		SingleLinkedList();
+		IterativeSingleLinkedList();
 		void insert(T element) override;
 		void remove(T element) override;
 		int size() override;
@@ -45,7 +47,9 @@ class SingleLinkedList : public LinkedList<T>{
 ////////////////////////////////////////////////
 
 template<class T>
-SingleLinkedList<T>::SingleLinkedList(){};
+IterativeSingleLinkedList<T>::IterativeSingleLinkedList(){
+	this->head = NULL;	
+};
 
 ////////////////////////////////////////////////
 
@@ -57,11 +61,11 @@ SingleLinkedList<T>::SingleLinkedList(){};
 ////////////////////////////////////////////////
 
 template<class T>
-bool SingleLinkedList<T>::isEmpty(){
+bool IterativeSingleLinkedList<T>::isEmpty(){
 	if(head){
-		return true;
+		return false;
 	}else{
-		return false;	
+		return true;	
 	}
 }
 
@@ -75,7 +79,7 @@ bool SingleLinkedList<T>::isEmpty(){
 //////////////////////////////////////////////////
 
 template<class T>
-Node<T> *SingleLinkedList<T>::getHead(){
+Node<T> *IterativeSingleLinkedList<T>::getHead(){
 	return this->head;
 }
 
@@ -89,15 +93,17 @@ Node<T> *SingleLinkedList<T>::getHead(){
 ////////////////////////////////////////////////////
 
 template<class T>
-void SingleLinkedList<T>::insert(T element){
+void IterativeSingleLinkedList<T>::insert(T element){
 	if(!head){
-		this->head = new Node<T>(element);	
+		this->head = new Node<T>(element);
+		this->head->next = NULL;	
 	}else{
 		Node<T> *aux = this->head;
 		while(aux->next){
 			aux = aux->next;
 		}
 		aux->next = new Node<T>(element);
+		aux->next->next = NULL;
 	}
 
 }
@@ -113,7 +119,7 @@ void SingleLinkedList<T>::insert(T element){
 //////////////////////////////////////////////////////
 
 template<class T>
-void SingleLinkedList<T>::remove(T element){
+void IterativeSingleLinkedList<T>::remove(T element){
 	if(head){
 		if(this->head->data == element){
 			Node<T> *removedElement = this->head;
@@ -146,7 +152,7 @@ void SingleLinkedList<T>::remove(T element){
 ////////////////////////////////////////////////////////
 
 template<class T>
-int SingleLinkedList<T>::size(){
+int IterativeSingleLinkedList<T>::size(){
 	if(head){
 		Node<T> *aux = this->head;
 		int count = 1;
@@ -171,7 +177,7 @@ int SingleLinkedList<T>::size(){
 /////////////////////////////////////////////////////////
 
 template<class T>
-T *SingleLinkedList<T>::search(T element){
+T *IterativeSingleLinkedList<T>::search(T element){
 	if(head){
 		if(this->head->data == element){
 			return &(this->head->data);
@@ -200,7 +206,7 @@ T *SingleLinkedList<T>::search(T element){
 //////////////////////////////////////////////////////////
 
 template<class T>
-std::vector<T> SingleLinkedList<T>::toVector(){
+std::vector<T> IterativeSingleLinkedList<T>::toVector(){
 	std::vector<T> result;
 	if(head){
 		Node<T>	*aux = this->head;
@@ -214,3 +220,4 @@ std::vector<T> SingleLinkedList<T>::toVector(){
 }
 
 ////////////////////////////////////////////////////////////
+#endif
