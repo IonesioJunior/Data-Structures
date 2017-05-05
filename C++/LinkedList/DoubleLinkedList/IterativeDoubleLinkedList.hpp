@@ -1,3 +1,5 @@
+#ifndef _ITERATIVELIST_H_
+#define _ITERATIVELIST_H_
 /*
 *@author Ionésio Junior
 */
@@ -38,31 +40,35 @@ struct Node{
 */
 //DoubleLinkedList.hpp
 template<class T>
-class DoubleLinkedList : public LinkedList<T>{
+class IterativeDoubleLinkedList : public LinkedList<T>{
 	private:
 		Node<T> *head;
 		Node<T> *tail;
 		Node<T> *searchNode(T element);
-	public:
-		DoubleLinkedList();
-		bool isEmpty() override;
-		void insert(T element) override;
-		void remove(T element) override;
-		int size() override;
-		T *search(T element);
 		Node<T> *getHead();
-		void insertFirst(T element) override;
+
+	public:
+
+		IterativeDoubleLinkedList();
+		void insert(T element) override;
+		void insertFirst(T element) override;		
+		void remove(T element) override;
 		void removeFirst() override;
 		void removeLast() override;
+		bool isEmpty() override;
+		int size() override;
 		std::vector<T> toVector() override;
-	
+		T *search(T element) override;	
 };
 
 //DoubleLinkedList.cpp
 ///////////////////////////////////////////////////////////
 
 template<class T>
-DoubleLinkedList<T>::DoubleLinkedList(){};
+IterativeDoubleLinkedList<T>::IterativeDoubleLinkedList(){
+	this->head = NULL;
+	this->tail = NULL;	
+};
 
 ///////////////////////////////////////////////////////////
 
@@ -74,7 +80,7 @@ DoubleLinkedList<T>::DoubleLinkedList(){};
 ///////////////////////////////////////////////////////////
 
 template<class T>
-bool DoubleLinkedList<T>::isEmpty(){
+bool IterativeDoubleLinkedList<T>::isEmpty(){
 	if(this->head){
 		return false;
 	}else{
@@ -92,11 +98,13 @@ bool DoubleLinkedList<T>::isEmpty(){
 ////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::insert(T element){
+void IterativeDoubleLinkedList<T>::insert(T element){
 	if(this->isEmpty()){
 		Node<T> *head = new Node<T>(element);
 		this->head = head;
+		this->head->previous = NULL;
 		this->tail = new Node<T>(this->head);
+		this->tail->next = NULL;
 		this->head->next = this->tail;
 	}else{
 		Node<T> *aux = this->head;
@@ -106,6 +114,7 @@ void DoubleLinkedList<T>::insert(T element){
 		aux->data = element;
 		aux->next = new Node<T>(aux);
 		this->tail = aux->next;
+		this->tail->next = NULL;
 	}
 }
 
@@ -119,7 +128,7 @@ void DoubleLinkedList<T>::insert(T element){
 ////////////////////////////////////////////////////////////
 
 template<class T>
-int DoubleLinkedList<T>::size(){
+int IterativeDoubleLinkedList<T>::size(){
 	if(isEmpty()){
 		return 0;	
 	}else{
@@ -144,7 +153,7 @@ int DoubleLinkedList<T>::size(){
 ////////////////////////////////////////////////////////////
 
 template<class T>
-Node<T>* DoubleLinkedList<T>::searchNode(T element){
+Node<T>* IterativeDoubleLinkedList<T>::searchNode(T element){
 	if(!isEmpty()){
 		Node<T> *aux = this->head;
 		while(aux != this->tail){
@@ -170,7 +179,7 @@ Node<T>* DoubleLinkedList<T>::searchNode(T element){
 ////////////////////////////////////////////////////////////
 
 template<class T>
-T* DoubleLinkedList<T>::search(T element){
+T* IterativeDoubleLinkedList<T>::search(T element){
 	if(!isEmpty()){
 		Node<T> *aux = this->head;
 		while(aux != this->tail){
@@ -195,7 +204,7 @@ T* DoubleLinkedList<T>::search(T element){
 /////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::remove(T element){
+void IterativeDoubleLinkedList<T>::remove(T element){
 	if(!isEmpty()){
 		Node<T> *foundNode = this->searchNode(element);
 		if(foundNode){
@@ -221,7 +230,7 @@ void DoubleLinkedList<T>::remove(T element){
 //////////////////////////////////////////////////////////////
 
 template<class T>
-Node<T> *DoubleLinkedList<T>::getHead(){
+Node<T> *IterativeDoubleLinkedList<T>::getHead(){
 	return this->head;
 }
 
@@ -235,7 +244,7 @@ Node<T> *DoubleLinkedList<T>::getHead(){
 //////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::insertFirst(T element){
+void IterativeDoubleLinkedList<T>::insertFirst(T element){
 	if(!isEmpty()){
 		Node<T> *newNode = new Node<T>(element,this->head);
 		this->head->previous = newNode;
@@ -254,7 +263,7 @@ void DoubleLinkedList<T>::insertFirst(T element){
 /////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::removeFirst(){
+void IterativeDoubleLinkedList<T>::removeFirst(){
 	if(!isEmpty()){
 		if(this->head->next == this->tail){
 			free(this->head);
@@ -278,7 +287,7 @@ void DoubleLinkedList<T>::removeFirst(){
 //////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::removeLast(){
+void IterativeDoubleLinkedList<T>::removeLast(){
 	if(!isEmpty()){
 		if(this->head->next == this->tail){
 			free(this->head);	
@@ -303,7 +312,7 @@ void DoubleLinkedList<T>::removeLast(){
 /////////////////////////////////////////////////////////////
 
 template<class T>
-std::vector<T> DoubleLinkedList<T>::toVector(){
+std::vector<T> IterativeDoubleLinkedList<T>::toVector(){
 	std::vector<T> result;
 	if(!isEmpty()){
 		Node<T> *aux = this->head;
@@ -316,3 +325,4 @@ std::vector<T> DoubleLinkedList<T>::toVector(){
 }
 
 //////////////////////////////////////////////////////////////
+#endif

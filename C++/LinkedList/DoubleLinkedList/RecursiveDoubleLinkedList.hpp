@@ -1,100 +1,164 @@
+#ifndef _RECURSIVELIST_H_
+#define _RECURSIVELIST_H_
 /*
 *@author Ionésio Junior
 */
+
 #include "DoubleLinkedList.hpp"
 /*
-*Recursive Double Linked List Implementation
+* Recursive Double Linked List Implementation
 */
-//DoubleLinkedList.cpp
+//RecursiveDoubleLinkedList.hpp
 template<class T>
-class DoubleLinkedList : public LinkedList<T>{
+class RecursiveDoubleLinkedList : public LinkedList<T>{
 	private:
 		T data;
-		DoubleLinkedList<T> *next;
-		DoubleLinkedList<T> *previous;
-		DoubleLinkedList<T> *searchNode(T element);
-		bool head_empty;
-		void recursiveToVector(std::vector<T> *vetor);
-		DoubleLinkedList(T element,DoubleLinkedList<T> *previous);
-		DoubleLinkedList(T element,DoubleLinkedList<T> *next,DoubleLinkedList<T> *previous);
+		RecursiveDoubleLinkedList<T> *next;
+		RecursiveDoubleLinkedList(T element);
+		bool empty_root;
+		void recursiveToVector(std::vector<T> * vetor);
+		RecursiveDoubleLinkedList *searchPrevious(T element);
 	public:
-		DoubleLinkedList();
+		RecursiveDoubleLinkedList();
 		void insert(T element) override;
+		void insertFirst(T element) override;		
 		void remove(T element) override;
-		T *search(T element) override;
-		int size() override;
-		std::vector<T> toVector() override;
-		void insertFirst(T element) override;
 		void removeFirst() override;
 		void removeLast() override;
 		bool isEmpty() override;
+		int size() override;
+		std::vector<T> toVector() override;
+		T *search(T element) override;
+		T getData();
 };
 
 
+//RecursiveDoubleLinkedList.cpp
 
-//DoubleLinkedList.cpp
 /*
 * Empty Constructor of linked list node
 */
-///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
 template<class T>
-DoubleLinkedList<T>::DoubleLinkedList(){
-	this->head_empty = true;	
-};
+RecursiveDoubleLinkedList<T>::RecursiveDoubleLinkedList(){
+	this->empty_root = true;
+}
 
-///////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 
 /*
 * Constructor of linked list node
 * @param element
-* @param PreviousNode
+*/
+//////////////////////////////////////////////////////////////
+
+template<class T>
+RecursiveDoubleLinkedList<T>::RecursiveDoubleLinkedList(T element){
+	this->data = element;
+	this->empty_root = false;
+}
+
+/////////////////////////////////////////////////////////////
+
+/*
+* Return true  if linked list is empty or false,otherwise.
+* Complexity : O(1)
+* @return bool
+*/
+/////////////////////////////////////////////////////////////
+
+template<class T>
+bool RecursiveDoubleLinkedList<T>::isEmpty(){
+	return this->empty_root;
+}
+
+/////////////////////////////////////////////////////////////
+
+/*
+* Get data stored in node
+* @return element
+*/
+//////////////////////////////////////////////////////////////
+
+template<class T>
+T RecursiveDoubleLinkedList<T>::getData(){
+	return this->data;
+}
+
+///////////////////////////////////////////////////////////////
+
+/*
+* Return size of list
+* Complexity : O(n)
+* @return int
 */
 ///////////////////////////////////////////////////////////////
 
 template<class T>
-DoubleLinkedList<T>::DoubleLinkedList(T element,DoubleLinkedList<T> *previous){
-	this->data = element;
-	this->previous = previous;
-	this->head_empty = false;
+int RecursiveDoubleLinkedList<T>::size(){
+	if(!empty_root){	
+		if(!next){
+			return 1;	
+		}else{
+			return 1 + next->size();
+		}
+	}else{
+		return 0;	
+	}
 }
 
 ////////////////////////////////////////////////////////////////
 
 /*
-* Constructor of linked list node
-* @param element
-* @param NextNode
-* @param PreviousNode
+* Search an element, if found return it return your pointer, else return NULL
+* Complexity : O(n)
+* @param element to be searched
+* @return elementFoundPointer
 */
-////////////////////////////////////////////////////////////////
-
-template<class T>
-DoubleLinkedList<T>::DoubleLinkedList(T element,DoubleLinkedList<T> *next,DoubleLinkedList<T> * previous){
-	this->data = element;
-	this->next = next;
-	this->previous = previous;
-}
-
 /////////////////////////////////////////////////////////////////
+
+template<class T>
+T * RecursiveDoubleLinkedList<T>::search(T element){
+	if(data == element){
+		RecursiveDoubleLinkedList<T> *previous = this->searchPrevious(element);
+		if(previous){
+			return &data;
+		}else{
+			if(this->empty_root){
+				return NULL;			
+			}else{
+				return &data;			
+			}		
+		}	
+	}else if(!next){
+		return NULL;	
+	}else{
+		return next->search(element);
+	}
+}
+
+//////////////////////////////////////////////////////////////////
 
 /*
 * Insert new element in last position of the list
 * Complexity : O(n)
 * @param new element
 */
-/////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::insert(T element){
-	if(head_empty){
+void RecursiveDoubleLinkedList<T>::insert(T element){
+	if(this->empty_root){
 		this->data = element;
-		this->head_empty = false;
+		this->empty_root = false;
+		this->next = NULL;
 	}else{
 		if(!next){
-			this->next = new DoubleLinkedList<T>(element,this);	
+			this->next = new RecursiveDoubleLinkedList<T>(element);
+			this->next->next = NULL;
 		}else{
-			next->insert(element);
+			this->next->insert(element);
 		}
 	}
 }
@@ -106,65 +170,38 @@ void DoubleLinkedList<T>::insert(T element){
 * Complexity : O(n)
 * @param element to be removed
 */
-//////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::remove(T element){
-	DoubleLinkedList<T> *foundNode = searchNode(element);
-	if(foundNode){
+void RecursiveDoubleLinkedList<T>::remove(T element){
+	RecursiveDoubleLinkedList<T> *previous = this->searchPrevious(element);
+	if(!previous){
 		if(data == element){
 			if(next){
-				std::cout << data << std::endl;
-				DoubleLinkedList<T> *removedNode = this->next;
+				RecursiveDoubleLinkedList<T> *removedNode = this->next;
 				this->data = this->next->data;
-				this->next->previous = this;
 				this->next = this->next->next;
 				free(removedNode);
 				removedNode = NULL;
+			}else{
+				this->empty_root = true;
 				return;
-			}else{
-				this->head_empty = true;
 			}
-		}else{	
-			DoubleLinkedList<T> *removedNode = foundNode;
-			if(foundNode->next){
-				foundNode->previous->next = foundNode->next;
-				foundNode->next->previous = foundNode->previous;
-				free(removedNode);
-				removedNode = NULL;
-			}else{
-				
-				this->removeLast();
-			}
+		}else{
+			return;
 		}
-	}
-}
-
-////////////////////////////////////////////////////////////////////
-
-/*
-* Search an element, if found return it return your pointer, else return NULL
-* Complexity : O(n)
-* @param element to be searched
-* @return elementFoundPointer
-*/
-////////////////////////////////////////////////////////////////////
-
-template<class T>
-T *DoubleLinkedList<T>::search(T element){
-	if(data == element){
-		return &(this->data);
-	}else if(next){
-		next->search(element);
 	}else{
-		return NULL;
+		RecursiveDoubleLinkedList<T> *removedNode = previous->next;
+		previous->next = previous->next->next;
+		free(removedNode);
+		removedNode = NULL;
 	}
 }
 
 ////////////////////////////////////////////////////////////////////
 
 /*
-* Search a node of element, or NULL if element isn't in the list
+* Search a previous node of element, or NULL if element isn't in the list
 * Complexity : O(n)
 * @param element
 * @return NodePointer 
@@ -172,39 +209,19 @@ T *DoubleLinkedList<T>::search(T element){
 ////////////////////////////////////////////////////////////////////
 
 template<class T>
-DoubleLinkedList<T> *DoubleLinkedList<T>::searchNode(T element){
-	if(data == element){
-		return this;
-	}else if(next){
-		next->search(element);
+RecursiveDoubleLinkedList<T> *RecursiveDoubleLinkedList<T>::searchPrevious(T element){
+	if(!this->next){
+		return NULL;	
 	}else{
-		return NULL;
+		if(next->data == element){
+			return this;
+		}else{
+			next->searchPrevious(element);
+		}
 	}
 }
 
 ////////////////////////////////////////////////////////////////////
-
-/*
-* Return size of list
-* Complexity : O(n)
-* @return int
-*/
-/////////////////////////////////////////////////////////////////////
-
-template<class T>
-int DoubleLinkedList<T>::size(){
-	if(!head_empty){
-		if(!next){
-			return 1;
-		}else{
-			return 1 + next->size();
-		}
-	}else{
-		return 0;
-	}
-}
-
-/////////////////////////////////////////////////////////////////////
 
 /*
 * Return an vector with list elements
@@ -214,11 +231,11 @@ int DoubleLinkedList<T>::size(){
 /////////////////////////////////////////////////////////////////////
 
 template<class T>
-std::vector<T> DoubleLinkedList<T>::toVector(){
+std::vector<T> RecursiveDoubleLinkedList<T>::toVector(){
 	std::vector<T> result;
-	if(!head_empty){
+	if(!empty_root){
 		this->recursiveToVector(&result);
-	}
+	}	
 	return result;
 }
 
@@ -230,7 +247,7 @@ std::vector<T> DoubleLinkedList<T>::toVector(){
 //////////////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
+void RecursiveDoubleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
 	if(next){
 		vetor->push_back(data);
 		next->recursiveToVector(vetor);
@@ -241,96 +258,79 @@ void DoubleLinkedList<T>::recursiveToVector(std::vector<T> *vetor){
 
 ///////////////////////////////////////////////////////////////////////
 
+
 /*
-* Insert new element in head of linked list
+* Insert in head position
 * Complexity : O(1)
 * @param element
 */
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::insertFirst(T element){
-	if(head_empty){
-		this->data = element;
-		this->head_empty = false;	
+void RecursiveDoubleLinkedList<T>::insertFirst(T element){
+	if(this->isEmpty()){
+		this->insert(element);	
 	}else{
-		DoubleLinkedList<T> *nextNode = new DoubleLinkedList(this->data,this->next,this);
-		if(next){
-			this->next->previous = nextNode;
-			this->data = element;
-			this->next = nextNode;
-		}else{
-			this->data = element;
-			this->next = nextNode;
-		}
+		RecursiveDoubleLinkedList<T> *newHead =	new RecursiveDoubleLinkedList<T>(this->data);
+		newHead->next = this->next;
+		this->data = element;
+		this->next = newHead;
 	}
 }
 
 //////////////////////////////////////////////////////////////////////
 
 /*
-* Remove the first element of the list
+* Remove first position
 * Complexity : O(1)
+* @param element
 */
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::removeFirst(){
-	if(!head_empty){
-		if(!next){
-			this->head_empty = true;
-		}else if(next->next){
-			DoubleLinkedList<T> *removedNode = this->next;
+void RecursiveDoubleLinkedList<T>::removeFirst(){
+	if(this->isEmpty()){
+		return;	
+	}else{	
+		if(this->next){
 			this->data = this->next->data;
-			this->next->next->previous = this;
 			this->next = this->next->next;
-			free(removedNode);
-			removedNode = NULL;
 		}else{
-			DoubleLinkedList<T> *removedNode = this->next;
-			this->data = this->next->data;
-			this->next = this->next->next;
-			free(removedNode);
-			removedNode = NULL;
+			this->empty_root = true;
+			this->next = NULL;	
 		}
 	}
 }
 
 //////////////////////////////////////////////////////////////////////
 
+
 /*
-* Remove the last element of the list
+* Remove last position element
 * Complexity : O(n)
+* @param element
 */
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
 
 template<class T>
-void DoubleLinkedList<T>::removeLast(){
-	if(!head_empty){
-		if(!next){
-			if(previous){
-				this->previous->next = NULL;
-			}else{
-				this->head_empty = true;
-			}
+void RecursiveDoubleLinkedList<T>::removeLast(){
+	if(!this->isEmpty()){		
+		RecursiveDoubleLinkedList *previous = NULL;
+		RecursiveDoubleLinkedList *aux = this;
+		while(aux->next){
+			previous = aux;
+			aux = aux->next;	
+		}
+		
+		if(previous){			
+			previous->next = NULL;
 		}else{
-			next->removeLast();
+			this->empty_root = true;
+			this->next = NULL;		
 		}
 	}
 }
 
 //////////////////////////////////////////////////////////////////////
 
-/*
-* Return true if list is empty or false,otherwise.
-* Complexity : O(1)
-* @return bool
-*/
-//////////////////////////////////////////////////////////////////
-
-template<class T>
-bool DoubleLinkedList<T>::isEmpty(){
-	return head_empty;
-}
-
-/////////////////////////////////////////////////////////////////
+#endif
