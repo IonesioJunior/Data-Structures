@@ -1,3 +1,6 @@
+#ifndef _BST_H_
+#define _BST_H_
+
 /*
 *@author Ionésio Junior
 */
@@ -17,19 +20,29 @@ struct Node {
     Node(T val,Node<T> *parent) {
         this->data = val;
 	this->parent = parent;
+	this->left = NULL;
+	this->right = NULL;
     }
 
     Node(T val){
 	this->data = val;
+    	this->left = NULL;
+	this->right = NULL;
+	this->parent = NULL;
     }
 
     Node(T val, Node<T> left, Node<T> right) {
         this->data = val;
         this->left = left;
         this->right = right;
+	this->parent = NULL;
     }
 	
-    Node(){};
+    Node(){
+ 	this->left = NULL;
+	this->right = NULL;
+	this->parent = NULL;	
+    };
 };
 
 //BST Class Implementation
@@ -52,6 +65,7 @@ class BinarySearchTree {
     
 
     public:
+	BinarySearchTree();
 	void insert(T val);
 	bool remove(T element);		
 	int size();    
@@ -74,6 +88,10 @@ class BinarySearchTree {
 //BinarySearchTree.cpp
 /////////////////////////////////////////	PUBLIC METHODS		///////////////////////////////////////////////////////////////////////
 
+template<class T>
+BinarySearchTree<T>::BinarySearchTree(){
+	this->root = NULL;
+}
 /*
 * Insert and element in leaf correct position
 * @param value
@@ -213,9 +231,14 @@ Node<T> *BinarySearchTree<T>::predecessor(T element){
 		return recursiveMaximum(foundNode->left);						
 	}else{
 		Node<T> *parentNode = foundNode->parent;		
-		while(parentNode && foundNode->data != parentNode->right->data){
-			parentNode = parentNode->parent;
-			foundNode = foundNode->parent;		
+		while(parentNode){
+			if(parentNode->right && foundNode->data == parentNode->right->data){
+			
+				break;
+			}else{
+				parentNode = parentNode->parent;
+				foundNode = foundNode->parent;
+			}
 		}
 		return parentNode;	
 	}
@@ -239,9 +262,13 @@ Node<T> *BinarySearchTree<T>::sucessor(T element){
 		return recursiveMinimum(foundNode->right);	
 	}else{
 		Node<T> *parentNode = foundNode->parent;
-		while(parentNode && foundNode->data != parentNode->left->data){
-			parentNode = parentNode->parent;
-			foundNode = foundNode->parent;	
+		while(parentNode){
+			if(parentNode->left && parentNode->left->data == foundNode->data){
+					break;
+			}else{
+				parentNode = parentNode->parent;
+				foundNode = foundNode->parent;
+			}
 		}
 		return parentNode;
 	}
@@ -311,7 +338,7 @@ void BinarySearchTree<T>::recursiveInsert(Node<T> *node, T val) {
             } else {
                 recursiveInsert(node->left, val);
             }
-        } else {
+        } else if(node->data < val){
             if (!node->right) {
                 node->right = new Node<T>(val,node);
             } else {
@@ -342,7 +369,7 @@ int BinarySearchTree<T>::recursiveSize(Node<T> *root) {
 template<class T>
 int BinarySearchTree<T>::recursiveHeight(Node<T> *root) {
         if (!root){
-		return 0;
+		return -1;
 	}else{ 
 		return 1 + std::max(recursiveHeight(root->left), recursiveHeight(root->right));
 	}
@@ -356,22 +383,26 @@ int BinarySearchTree<T>::recursiveHeight(Node<T> *root) {
 template<class T>
 bool BinarySearchTree<T>::recursiveRemove(Node<T>* parent, Node<T>* current, T element) {
         if (!current) return false;
+
         if (current->data == element) {
             if (current->left == NULL || current->right == NULL) {
                 Node<T>* temp = current->left;
                 if (current->right) temp = current->right;
                 if (parent) {
-                    if (parent->left == current) {
+		    if (parent->left == current) {
                         parent->left = temp;
-                    } else {
+                    	if(temp) temp->parent = parent;
+		    } else {
                         parent->right = temp;
-                    }
+                  	if(temp) temp->parent = parent;
+		    }
                 } else {
                     this->root = temp;
+		    if(temp) temp->parent = NULL;
                 }
             } else {
                 Node<T>* validSubs = current->right;
-                while (validSubs->left) {
+		while (validSubs->left) {
                     validSubs = validSubs->left;
                 }
                 T temp = current->data;
@@ -461,8 +492,8 @@ template<class T>
 void BinarySearchTree<T>::recursivePreOrder(std::vector<T> *vetor,Node<T> *node){
 	if(node){
 		vetor->push_back(node->data);
-		recursiveOrder(vetor,node->left);
-		recursiveOrder(vetor,node->right);
+		recursivePreOrder(vetor,node->left);
+		recursivePreOrder(vetor,node->right);
 	}
 }
 
@@ -474,11 +505,11 @@ void BinarySearchTree<T>::recursivePreOrder(std::vector<T> *vetor,Node<T> *node)
 template<class T>
 void BinarySearchTree<T>::recursivePostOrder(std::vector<T> *vetor,Node<T> *node){
 	if(node){
-		recursiveOrder(vetor,node->left);
-		recursiveOrder(vetor,node->right);		
+		recursivePostOrder(vetor,node->left);
+		recursivePostOrder(vetor,node->right);		
 		vetor->push_back(node->data);
 	}
 }
 
 ///////////////////////////////////////////////////////////////////
-
+#endif
